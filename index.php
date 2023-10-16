@@ -1,7 +1,7 @@
 <?php
 require  "main/init.php";
 $conn = Db_connect();
-$news = getNews($conn);
+$news = getNews( $conn );
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ $news = getNews($conn);
                     $imageLink = '<img src="assets/uploads/fallbackImage/fallbackImage.webp" alt="' . $article['title'] . '">';
                 }
 
-                echo '<a class="newLinka" href="/testphp/news.php?key=' . $article['newskey'] . '"><div class="card"> ';
+                echo '<a class="newLinka" href="/newspaper/news.php?key=' . $article['newskey'] . '"><div class="card"> ';
                 echo  $imageLink;
                 echo '<div class="card-content">';
                 echo '<h4>' . $article['title'] . '</h4>';

@@ -1,9 +1,9 @@
 <?php
 function Db_connect(){
     $servername = "localhost";
-    $username = "wpdbuser";
+    $username = "root";
     $password = "";
-    $database = "movie";
+    $database = "newsportal";
 
     // Create a connection
     $conn = new mysqli( $servername, $username, $password, $database );

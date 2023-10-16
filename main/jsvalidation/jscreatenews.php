@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imageFileName = $timestamp . '_' . basename($_FILES["images"]["name"]); // Append timestamp to the image file name
     $targetDir = "../../assets/uploads/";
     $targetFile = $targetDir . $imageFileName;
-    $result = insertNews( $title,$newkey, $description, $imageFileName, $category, $userid, $conn );
+    $result = insertNews( $title, $newkey, $description, $imageFileName, $category, $userid, $conn );
     move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
 //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
 } else {
