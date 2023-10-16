@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    align-items: center;
+
+}
+.newCardHolder{
+    display: block;
+    position: relative;
+    width: calc(100% - 200px);
+    margin: auto;
+    top: 20px;
+}
+.newcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.card {
+    width: 300px;
+    height: 410px;
+    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card h2 {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card .category {
+    font-size: 0.9em;
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1em;
+    color: #666;
+    max-height: 40px;
+    overflow: hidden;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.card .read-more {
+    text-decoration: none;
+    color: #4caf50;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.card .read-more:hover {
+    color: #45a049;
+}
+.newLinka{
+    text-decoration: none;
+}
+
+@media screen and (max-width: 420px) {
+    .newCardHolder {
+        width: 100%;
+    }
+}
+
+
