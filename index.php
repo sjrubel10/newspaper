@@ -19,13 +19,16 @@ $news = getNews( $conn );
         <div class="newcontainer">
             <?php
             foreach ($news as $article) {
+                $lowercaseString = strtolower( trim($article['title'] ) );
+                $slug = str_replace(' ', '-', $lowercaseString);
+
                 if($article['images']){
                     $imageLink = '<img src="assets/uploads/' . $article['images'] . '" alt="' . $article['title'] . '">';
                 }else{
                     $imageLink = '<img src="assets/uploads/fallbackImage/fallbackImage.webp" alt="' . $article['title'] . '">';
                 }
 
-                echo '<a class="newLinka" href="/newspaper/news.php?key=' . $article['newskey'] . '"><div class="card"> ';
+                echo '<a class="newLinka" href="/newspaper/news.php?key='.$article['newskey'].'title='.$slug.'"><div class="card"> ';
                 echo  $imageLink;
                 echo '<div class="card-content">';
                 echo '<h4>' . $article['title'] . '</h4>';
