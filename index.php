@@ -28,7 +28,7 @@ $news = getNews( $conn );
                     $imageLink = '<img src="assets/uploads/fallbackImage/fallbackImage.webp" alt="' . $article['title'] . '">';
                 }
 
-                echo '<a class="newLinka" href="/newspaper/news.php?key='.$article['newskey'].'title='.$slug.'"><div class="card"> ';
+                echo '<a class="newLinka" href="/newspaper/news.php?key='.$article['newskey'].'&title='.$slug.'"><div class="card"> ';
                 echo  $imageLink;
                 echo '<div class="card-content">';
                 echo '<h4>' . $article['title'] . '</h4>';

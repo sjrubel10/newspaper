@@ -1,8 +1,8 @@
 <?php
 function Db_connect(){
     $servername = "localhost";
-//    $username = "root";
-    $username = "wpdbuser";
+    $username = "root";
+//    $username = "wpdbuser";
     $password = "";
     $database = "newsportal";
 
@@ -16,5 +16,4 @@ function Db_connect(){
 
     // Return the connection object
     return $conn;
-
 }

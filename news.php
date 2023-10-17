@@ -6,6 +6,7 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     $key = $_GET['key'];
     //$newData = getsingleNews( $key,$conn );
     $newData = getNewsByKey($conn, $key);
+    if( count($newData) > 0 ){
     if($newData['images']){
         $imageLink = '<img src="assets/uploads/' . $newData['images'] . '" alt="' . $newData['title'] . '">';
     }else{
@@ -61,6 +62,9 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     </html>
 
 <?php } else {
+        header("Location: index.php");
+    }
+} else {
     header("Location: index.php");
 }?>
 
