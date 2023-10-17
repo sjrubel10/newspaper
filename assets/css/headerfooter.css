@@ -1,0 +1,119 @@
+/* Reset some default styles for consistency */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header and footer design */
+.design {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Header styles */
+.design .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Add padding to the left and right */
+}
+
+.design .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.design .menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.design nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.design nav li {
+    margin-right: 20px;
+}
+
+.design nav a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.design nav a:hover {
+    color: #ff6600;
+}
+
+/* Search bar styles */
+.design .search {
+    display: flex;
+    align-items: center;
+}
+
+.design .search input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 200px; /* Adjust the width as needed */
+}
+
+.design .search button {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.design .search button:hover {
+    background-color: #e65500;
+}
+
+/* Footer styles */
+.design .footer-content {
+    text-align: center;
+    padding: 10px;
+    background-color: #222;
+}
+
+.design .footer-content p {
+    font-size: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .design .header-content {
+        flex-wrap: wrap;
+    }
+
+    .design .menu-toggle {
+        display: block;
+        margin-right: 10px;
+    }
+
+    .design nav {
+        flex-basis: 100%;
+        display: none;
+        margin-top: 10px;
+    }
+
+    .design nav.active {
+        display: block;
+    }
+
+    .design nav ul {
+        flex-direction: column;
+    }
+
+    .design nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
