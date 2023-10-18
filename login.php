@@ -14,6 +14,8 @@ require "main/init.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/headerfooter.css">
     <link rel="stylesheet" type="text/css" href="assets/css/registration_login.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/common.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/login.js"></script>
     <title>Login</title>
@@ -22,8 +24,8 @@ require "main/init.php";
 <?php
 
 //include "views/header.php"; ?>
-
-<div class="container">
+<?php include_once "views/header.php"?>
+<div class="logincontainer">
     <h2>Login</h2>
     <form id="loginForm" method="post">
         <div class="form-group">

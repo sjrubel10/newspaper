@@ -20,13 +20,16 @@ $(document).ready(function() {
                 password: password
             },
             function(data) {
+                // json_decode
+                let result_data = JSON.parse( data );
                 console.log( data );
-                if (data === "success") {
-                    $("#message").text("Login successful.");
+                if ( data['success'] ) {
+                    $("#message").text(result_data['message']);
                     $("#loginForm").hide();
                     $("#logout-container").show();
+                    winndow.location.href = 'index.php';
                 } else {
-                    $("#message").text("Login failed. Check your username and password.");
+                    $("#message").text(result_data['message']);
                 }
                 });
         });

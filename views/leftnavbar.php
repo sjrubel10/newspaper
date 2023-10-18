@@ -8,7 +8,7 @@
                 $categoryKeyValueArray[$key] = $category;
                 $id = $key; // Generating unique ID for each category
                 $class = 'left-nav-item'; // Class for styling
-                echo '<div id="' . $id . '" class="' . $class . '">' . $category . '</div>';
+                echo '<a class="leftnavlinktext" href="index.php?category='.$key.'"><div id="' . $id . '" class="' . $class . '">' . $category . '</div></a>';
             }
         ?>
     </div>

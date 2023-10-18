@@ -39,7 +39,9 @@
 }
 
 .left-nav-item:hover {
-background-color: #444;
+    color: #f74040;
+    background-color: #ffffff;
+    border-radius: 3px;
 }
 
 /* Add your CSS styles here */
@@ -79,6 +81,14 @@ background-color: #444;
     margin: 5px 0;
     font-size: 14px;
     color: #666;
+}
+.logotextlink{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.leftnavlinktext{
+    text-decoration: none;
+    color: #333333;
 }
 
 

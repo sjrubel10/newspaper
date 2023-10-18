@@ -16,6 +16,26 @@ body {
     background-color: #007bff;
     color: #ffffff;
 }
+.search-container {
+    display: flex;
+    max-width: 300px; /* Adjust the width as needed */
+}
+
+.search-input {
+    width: 200px; /* Fixed width for the text field */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 .logo img {
     height: 50px; /* Adjust the height as needed */

@@ -20,9 +20,14 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $newData['title']?></title>
+        <link rel="stylesheet" href="assets/css/header.css">
         <link rel="stylesheet" href="assets/css/news.css">
+        <link rel="stylesheet" href="assets/css/common.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
+    <?php include_once "views/header.php"?>
     <div class="news-container">
         <div class="news-details">
             <h1 class="news-title"><?php echo $newData['title']?></h1>

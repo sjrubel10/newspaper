@@ -1,7 +1,8 @@
 <?php
-require "main/init.php";
-
+require "../main/init.php";
+ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){
 $categorys = news_category();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +10,12 @@ $categorys = news_category();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Form</title>
-    <link rel="stylesheet" href="assets/css/createnew.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/createnew.css">
 </head>
 <body>
+<?php include_once "../views/header.php"?>
 <h1 class="createNewsTitle">Create News</h1>
 <div class="formHolder">
     <div class="form-container">
@@ -43,7 +47,10 @@ $categorys = news_category();
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/createnew.js"></script>
+<script src="../assets/js/createnew.js"></script>
 </body>
 </html>
+<?php } else {
+     header('Location:index.php');
+ }?>
 

@@ -1,19 +1,36 @@
 <?php
-function getNews($conn){
-    $sql = "SELECT * FROM news WHERE `recorded`=1 ORDER BY id DESC";
-
-    // Execute the query
+function getNews( $conn, $limit, $category = false ){
+    if( $category ){
+        $sql = "SELECT * FROM news WHERE `recorded`=1 AND `category`= '$category' ORDER BY id DESC LIMIT $limit";
+    }else{
+        $sql = "SELECT * FROM news WHERE `recorded`=1 ORDER BY id DESC";
+    }
     $result = $conn->query($sql);
-    // Check if the query was successful
     if ( $result ) {
         $newsRecords = array();
-
-        // Fetch the records as an associative array
         while ($row = $result->fetch_assoc()) {
             $newsRecords[] = $row;
         }
+        $conn->close();
 
-        // Close the database connection
+        // Return the retrieved records
+        return $newsRecords;
+    } else {
+        // Handle query error (you can log or return an error message)
+        $conn->close();
+        return [];
+    }
+}
+function getNews_search( $conn, $limit, $search = '' ){
+
+    $sql = "SELECT * FROM news WHERE `recorded`=1 AND `title` LIKE '%$search%' ORDER BY id DESC LIMIT $limit";
+
+    $result = $conn->query($sql);
+    if ( $result ) {
+        $newsRecords = array();
+        while ($row = $result->fetch_assoc()) {
+            $newsRecords[] = $row;
+        }
         $conn->close();
 
         // Return the retrieved records
@@ -48,35 +65,6 @@ function getNewsByKey( $conn, $key ) {
         // Handle prepare error (you can log or return an error message)
         return $newsData;
     }
-}
-
-
-
-function insertNews1( $title, $newkey, $description, $images, $category, $userid, $conn ) {
-    // Prepare SQL statement
-    // Set your values for $title, $description, $images, $category, $userid before calling this function
-    $stmt = $conn->prepare("INSERT INTO news ( `title`,`newskey`, `description`, `images`, `category`, `userid` ) VALUES ( ?, ?, ?, ?, ?, ? )");
-    // Bind parameters and execute the statement
-    $stmt->bind_param("sssssi", $title, $newkey, $description, $images, $category, $userid);
-    // Execute the statement
-    if ($stmt->execute()) {
-        $result = array(
-            'success' => true,
-            'message'=>"New record inserted successfully",
-            'status_code'=>202
-        );
-    } else {
-        echo "Error: " . $stmt->error;
-        $result = array(
-            'success' => false,
-            'message'=>"Error: " . $stmt->error,
-            'status_code'=>404
-        );
-    }
-
-    // Close the statement
-    $stmt->close();
-    return $result;
 }
 
 function insertNews($title, $newkey, $description, $images, $category, $userid, $conn) {
