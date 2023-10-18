@@ -1,116 +1,58 @@
 body {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
 }
 
-.header {
-    background-color: #f00; /* Red background similar to prothomalo.com */
-    color: #fff;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 .container {
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 20px 0;
+}
+
+.header {
+    background-color: #007bff;
+    color: #ffffff;
 }
 
 .logo img {
-    height: 50px; /* Adjust the height based on your logo */
+    height: 50px; /* Adjust the height as needed */
 }
 
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.bar {
-    background-color: #fff;
-    height: 4px;
-    width: 30px;
-    margin: 4px 0;
-    transition: 0.4s;
-}
-
-.menu ul {
+.nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-.menu ul li {
-    margin-right: 20px;
+.nav ul li {
+    margin: 0 20px;
 }
 
-.menu ul li:last-child {
-    margin-right: 0;
-}
-
-.menu ul li a {
-    color: #fff;
+.nav ul li a {
     text-decoration: none;
+    color: #ffffff;
     font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s;
+    transition: 0.3s;
 }
 
-.menu ul li a:hover {
-    color: #ffcc00; /* Yellow color on hover */
+.nav ul li a:hover {
+    color: #f0f0f0;
 }
 
-.search input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-}
-
-.search button {
-    background-color: #ffcc00;
-    color: #fff;
+.cta .btn {
+    background-color: #ffffff;
+    color: #007bff;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 0 5px 5px 0;
+    transition: 0.3s;
 }
 
-/* Responsive Styles */
-
-@media (max-width: 768px) {
-    .menu ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #333;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        text-align: center;
-    }
-
-    .menu ul.show {
-        display: flex;
-    }
-
-    .menu ul li {
-        margin: 0;
-        padding: 10px 0;
-    }
-
-    .menu-toggle {
-        display: flex;
-        flex-direction: column;
-    }
+.cta .btn:hover {
+    background-color: #f0f0f0;
 }

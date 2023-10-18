@@ -3,52 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Prothom Alo</title>
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <title>Your Website</title>
 </head>
 <body>
-<div class="header">
+<header class="header">
     <div class="container">
         <div class="logo">
-            <img src="logo.png" alt="Prothom Alo Logo">
+            <img src="logo.png" alt="Logo">
         </div>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <nav class="menu">
+        <nav class="nav">
             <ul>
-                <li><a href="#">প্রথম পাতা</a></li>
-                <li><a href="#">বাংলাদেশ</a></li>
-                <li><a href="#">আন্তর্জাতিক</a></li>
-                <li><a href="#">অর্থনীতি</a></li>
-                <li><a href="#">বিনোদন</a></li>
-                <li><a href="#">খেলা</a></li>
-                <li><a href="#">মতামত</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <div class="search">
-            <input type="text" placeholder="অনুসন্ধান করুন">
-            <button>অনুসন্ধান</button>
+        <div class="cta">
+            <button class="btn">Get Started</button>
         </div>
     </div>
-</div>
-
+</header>
 <!-- Rest of your website content goes here -->
-
-<script src="script.js"></script>
 </body>
 </html>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuToggle = document.querySelector(".menu-toggle");
-        const menu = document.querySelector(".menu ul");
-
-        menuToggle.addEventListener("click", function() {
-            menu.classList.toggle("show");
-        });
-    });
-
-</script>

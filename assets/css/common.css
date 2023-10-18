@@ -1,0 +1,89 @@
+.newCardHolder{
+    display: block;
+    position: relative;
+    width: calc(100% - 100px);
+    margin: auto;
+    top: 20px;
+}
+
+.leftnavbarHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: 200px;
+}
+.maincontentHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: calc(100% - 500px);
+}
+.rightsideHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: 300px;
+}
+
+/* Add your CSS styles here */
+.left-nav {
+    width: calc(200px - 20px);
+    color: #444;
+    padding: 35px 10px 10px 10px;
+}
+
+.left-nav-item {
+    width: calc( 100% - 20px);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.left-nav-item:hover {
+background-color: #444;
+}
+
+/* Add your CSS styles here */
+.right-panel {
+    width: 300px;
+    float: right;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.right-panel-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-panel-card-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+.right-panel-card-details {
+    padding: 15px;
+}
+
+.right-panel-card-title {
+    margin: 0;
+    font-size: 14px;
+}
+
+.right-panel-card-author, .right-panel-card-date {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+
+@media screen and (max-width: 420px) {
+    .newCardHolder {
+        width: 100%;
+    }
+}

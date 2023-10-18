@@ -8,19 +8,16 @@ body {
     align-items: center;
 
 }
-.newCardHolder{
-    display: block;
-    position: relative;
-    width: calc(100% - 200px);
-    margin: auto;
-    top: 20px;
-}
+
 .newcontainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
+.mainpageHeading{
+    display: block;
+    font-size: 24px;
+}
 
 .card {
     width: 300px;
@@ -88,10 +85,6 @@ body {
     text-decoration: none;
 }
 
-@media screen and (max-width: 420px) {
-    .newCardHolder {
-        width: 100%;
-    }
-}
+
 
 

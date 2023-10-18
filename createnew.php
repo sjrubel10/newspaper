@@ -1,14 +1,7 @@
 <?php
-$categorys = array( 'War', 'Government', 'Politics', 'Education', 'Health', 'The environment',
-    'Economy', 'Business', 'Fashion', 'Entertainment', 'Sport', 'Banking & Finance', 'Computers & IT','Art & Culture',
-'Books & Literature',
-'Celebrity Gossip & Social',
-'Movies',
-'Music',
-'Performing Arts',
-'Photography',
-'Television (consumer)',
-'Video/DVD Reviews');
+require "main/init.php";
+
+$categorys = news_category();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +29,8 @@ $categorys = array( 'War', 'Government', 'Politics', 'Education', 'Health', 'The
             <select id="category" name="category" required>
                 <?php
                     foreach ($categorys as $category) {
-                        echo '<option value="' . $category . '">' . $category . '</option>';
+                        $key = str_replace(' ', '', strtolower($category));
+                        echo '<option value="' . $key . '">' . $category . '</option>';
                     }
                 ?>
             </select>
