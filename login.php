@@ -39,6 +39,7 @@ require "main/init.php";
         <button class="loginSubmit" type="submit">Login</button>
     </form>
     <div id="message"></div>
+    <div class=""><a href="registration.php">Create A New Account</a></div>
 </div>
 <!--<div class="container" id="logout-container">
     <h2>Logout</h2>

@@ -18,6 +18,7 @@
         <div class="sidebarholder">
             <h1>Admin Panel</h1>
             <ul>
+                <li class="manage-admins" id="manage-admins"><a href="createnew.php">Create News</a></li>
                 <li class="manage-admins" id="manage-admins">Manage Admins</li>
                 <li class="manage-posts" id="manage-admins">Manage Posts</li>
                 <li class="analytics" id="manage-admins">Analytics</li>
@@ -51,6 +52,6 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/addmin.js"></script>
+<script src="adminassets/js/admin.js"></script>
 
 </html>

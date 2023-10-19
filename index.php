@@ -29,7 +29,7 @@ if( count($news) < 1 ){
 <body>
     <?php include_once "views/header.php"?>
     <div class="newCardHolder">
-        <div class="leftnavbarHolder">
+        <div class="leftnavbarHolder" id="leftnavbarHolder">
             <?php include "views/leftnavbar.php"?>
         </div>
         <div class="maincontentHolder">

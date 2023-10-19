@@ -8,12 +8,12 @@
 </head>
 <body>
 <header class="header">
-    <div class="container">
-        <div class="logo">
-<!--            <img src="logo.png" alt="Logo">-->
-            <a class="logotextlink" href="index.php"><span class="logotext"><h3>News</h3></span></a>
-        </div>
+    <div class="headerContainer">
 
+        <div class="menuIconHolder">
+            <div class="menushowHide" id="menushowHide"><img class="menuicon" src="/newspaper/assets/uploads/siteicon/menuicon1.png"></div>
+            <a class="logotextlink" href="/newspaper/index.php"><span class="logotext"><h3>News</h3></span></a>
+        </div>
         <div class="search-container">
             <input type="text" class="search-input" id="search-input" placeholder="Search...">
             <button type="submit" class="search-button" onClick="divFunction()">Search</button>
@@ -48,6 +48,15 @@
         }
 
     }
+
+    $(".menushowHide").click(function(){
+        // let id = $(this).attr('id');
+        if($('#leftnavbarHolder').css('display') == 'none') {
+            $("#leftnavbarHolder").show();
+        }else {
+            $("#leftnavbarHolder").hide();
+        }
+    });
 
 </script>
 

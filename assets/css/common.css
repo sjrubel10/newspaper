@@ -1,6 +1,7 @@
 .newCardHolder{
     display: block;
     position: relative;
+    float: left;
     width: calc(100% - 100px);
     margin: auto;
     top: 20px;
@@ -29,7 +30,7 @@
 .left-nav {
     width: calc(200px - 20px);
     color: #444;
-    padding: 35px 10px 10px 10px;
+    padding: 35px 10px 10px 40px;
 }
 
 .left-nav-item {
@@ -85,12 +86,64 @@
 .logotextlink{
     text-decoration: none;
     color: #FFFFFF;
+    margin-left: 10px;
 }
 .leftnavlinktext{
     text-decoration: none;
     color: #333333;
 }
 
+.showHiddenLeftNavBar{
+    display: block;
+    float: left;
+    width: 200px;
+    background-color: #484545;
+    border-radius: 10px;
+    color: #FFF;
+    position: absolute;
+    z-index: 9;
+    top: -20px;
+    left: -4px;
+}
+
+@media screen and (max-width: 950px) {
+    .leftnavbarHolder {
+        display: none;
+        float: left;
+        width: 200px;
+        background-color: #fff;
+        color: #FFF;
+        position: absolute;
+        z-index: 9;
+        top: -20px;
+        left: -4px;
+        border: 1px solid #bcb2b2;
+    }
+    .menushowHide{
+        display: block;
+    }
+    .maincontentHolder{
+        width: calc( 100% - 300px );
+    }
+    .newCardHolder{
+        width: calc( 100% - 20px );
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 650px) {
+
+    .maincontentHolder{
+        width: 100% ;
+    }
+    .newCardHolder{
+        width: calc( 100% - 30px );
+        padding: 15px;
+    }
+    .rightsideHolder{
+        margin: auto;
+        float: none;
+    }
+}
 
 @media screen and (max-width: 420px) {
     .newCardHolder {
