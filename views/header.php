@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="header">
-    <div class="headerContainer">
+    <div class="headerContainer" id="headerContainer">
 
         <div class="menuIconHolder">
             <div class="menushowHide" id="menushowHide"><img class="menuicon" src="/newspaper/assets/uploads/siteicon/menuicon1.png"></div>
@@ -22,12 +22,12 @@
         <div class="cta">
             <?php
             if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){?>
-                <a href="logout.php"><button class="btn">Logout</button></a>
+                <a href="/newspaper/logout.php"><button class="btn">Logout</button></a>
                 <?php if( $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){?>
-                    <a href="managesite/admin.php"><button class="btn">Admin</button></a>
+                    <a href="/newspaper/managesite/admin.php"><button class="btn">Admin</button></a>
                 <?php }?>
             <?php } else {?>
-                <a href="login.php"><button class="btn">Login</button></a>
+                <a href="/newspaper/login.php"><button class="btn">Login</button></a>
             <?php }?>
         </div>
     </div>
@@ -51,7 +51,7 @@
 
     $(".menushowHide").click(function(){
         // let id = $(this).attr('id');
-        if($('#leftnavbarHolder').css('display') == 'none') {
+        if($('#leftnavbarHolder').css('display') === 'none') {
             $("#leftnavbarHolder").show();
         }else {
             $("#leftnavbarHolder").hide();

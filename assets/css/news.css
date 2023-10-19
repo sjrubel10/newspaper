@@ -75,7 +75,7 @@ body {
 }
 
 .comment-box textarea {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;

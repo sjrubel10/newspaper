@@ -2,8 +2,7 @@
     display: block;
     position: relative;
     float: left;
-    width: calc(100% - 100px);
-    margin: auto;
+    width: 100%;
     top: 20px;
 }
 
