@@ -106,3 +106,26 @@ function user_registration( $user_input_data ){
 
     return $result;
 }
+
+function getUsersData($conn, $limit = 20 ) {
+    $usersData = array();
+
+    // SQL query to select data from the users table
+    $sql = "SELECT * FROM users ORDER BY `id` LIMIT $limit";
+
+    // Execute the query
+    $result = $conn->query($sql);
+
+    // Check if the query was successful
+    if ($result->num_rows > 0) {
+        // Fetch data from each row and store it in the $usersData array
+        while($row = $result->fetch_assoc()) {
+            unset( $row['password']);
+            unset( $row['id']);
+            $usersData[] = $row;
+        }
+    }
+
+    // Return the array containing users' data
+    return $usersData;
+}
