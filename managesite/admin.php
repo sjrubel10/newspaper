@@ -4,7 +4,7 @@
     $display_limit = 20;
     $usersData = getUsersData( $conn, $display_limit );
     $news = getNews( $conn, $display_limit );
-//    var_test_die( $news );
+//    var_test_die( $usersData );
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -34,6 +34,9 @@
                 <div class="admincontentholder">
                     <div id="manage-admins_holder" class="tab-content" style="display: block">
                         <h2>Manage Admin</h2>
+                        <div class="adminDisplayUserInfoHolder">
+                            <?php include "views/admindisplayuserinfo.php"?>
+                        </div>
 
                     </div>
                     <div id="manage-posts_holder" class="tab-content">

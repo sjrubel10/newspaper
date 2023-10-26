@@ -9,6 +9,9 @@ function var_test_die( $data ){
     var_dump($data);
     die();
 }
+function var_test( $data ){
+    var_dump($data);
+}
 function getUserIdByProfileKey( $profileKey ) {
     $conn = Db_connect();
 
@@ -107,7 +110,7 @@ function user_registration( $user_input_data ){
     return $result;
 }
 
-function getUsersData($conn, $limit = 20 ) {
+function getUsersData( $conn, $limit = 20 ) {
     $usersData = array();
 
     // SQL query to select data from the users table
