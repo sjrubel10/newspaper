@@ -132,3 +132,13 @@ function getUsersData( $conn, $limit = 20 ) {
     // Return the array containing users' data
     return $usersData;
 }
+
+function user_admin_status( $status_number ){
+    $admis_status= array(
+        1=>'Super Admin',
+        2=>'Admin',
+        3=>'Modaretor',
+    );
+
+    return $admis_status[$status_number];
+}

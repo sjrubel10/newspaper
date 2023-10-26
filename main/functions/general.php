@@ -1,4 +1,6 @@
 <?php
+//$sql = "ALTER TABLE `users` ADD `admin_level` INT(2) NOT NULL DEFAULT '0' AFTER `admin`";
+
 function news_category(){
     $categorys = array( 'Government','Sport', 'War', 'Politics', 'Education', 'Health', 'The environment',
         'Economy', 'Business', 'Fashion', 'Entertainment', 'Banking & Finance', 'Computers & IT','Art & Culture',

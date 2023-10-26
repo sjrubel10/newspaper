@@ -21,12 +21,12 @@ if( count( $usersData ) > 0 ) {
                                 <td>' . $userData['first_name'].' '.$userData['last_name']. '</td>
                                 <td>' . $userData['username'] . '</td>
                                 <td>' . $userData['mail'] . '</td>
-                                <td><input type="checkbox"></td>
+                                <td><input id="'.$userData['userkey'].'_checkbox" type="checkbox"></td>
                                 <td>
-                                    <select>
-                                        <option value="superadmin">Super Admin</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="user">Modaretor</option>
+                                    <select id="'.$userData['userkey'].'select">
+                                        <option value="1">Super Admin</option>
+                                        <option value="2">Admin</option>
+                                        <option value="3">Modaretor</option>
                                     </select>
                                 </td>
                                 <td><button>Delete</button></td>
