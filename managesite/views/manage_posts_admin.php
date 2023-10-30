@@ -1,4 +1,5 @@
 <?php
+//ALTER TABLE `news` ADD `post_status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `recorded`;
 ?>
 <h1> Manage Posts </h1>
 <div class="post-card_holde">

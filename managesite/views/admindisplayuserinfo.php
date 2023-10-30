@@ -24,7 +24,7 @@ if( count( $usersData ) > 0 ) {
                                 <td><input id="'.$userData['userkey'].'_checkbox" type="checkbox"></td>
                                 <td>
                                     <select id="'.$userData['userkey'].'select">
-                                        <option value="1">Super Admin</option>
+                                       <!--  <option value="1">Super Admin</option> -->
                                         <option value="2">Admin</option>
                                         <option value="3">Modaretor</option>
                                     </select>
