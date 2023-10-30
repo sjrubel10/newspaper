@@ -46,7 +46,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
                 <textarea id="description" name="description" required><?php echo $newData['description']?></textarea><br>
 
                 <label for="images">Image:</label>
-                <input type="file" id="images" name="images" accept="image/*" required><br>
+                <input type="file" id="images" name="images" accept="image/*"><br>
 
                 <label for="category">Category:</label>
                 <select id="category" name="category" required>
