@@ -1,9 +1,9 @@
 <?php
 function getNews( $conn, $limit, $category = false ){
     if( $category ){
-        $sql = "SELECT * FROM news WHERE `recorded`=1 AND `category`= '$category' ORDER BY id DESC LIMIT $limit";
+        $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`=1 AND `category`= '$category' ORDER BY id DESC LIMIT $limit";
     }else{
-        $sql = "SELECT * FROM news WHERE `recorded`=1 ORDER BY id DESC";
+        $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`=1 ORDER BY id DESC";
     }
     $result = $conn->query($sql);
     if ( $result ) {
@@ -12,7 +12,6 @@ function getNews( $conn, $limit, $category = false ){
             $newsRecords[] = $row;
         }
         $conn->close();
-
         // Return the retrieved records
         return $newsRecords;
     } else {
@@ -22,9 +21,7 @@ function getNews( $conn, $limit, $category = false ){
     }
 }
 function getNews_search( $conn, $limit, $search = '' ){
-
-    $sql = "SELECT * FROM news WHERE `recorded`=1 AND `title` LIKE '%$search%' ORDER BY id DESC LIMIT $limit";
-
+    $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`=1 AND `title` LIKE '%$search%' ORDER BY id DESC LIMIT $limit";
     $result = $conn->query($sql);
     if ( $result ) {
         $newsRecords = array();
@@ -32,7 +29,6 @@ function getNews_search( $conn, $limit, $search = '' ){
             $newsRecords[] = $row;
         }
         $conn->close();
-
         // Return the retrieved records
         return $newsRecords;
     } else {
@@ -67,7 +63,7 @@ function getNewsByKey( $conn, $key ) {
     }
 }
 
-function insertNews($title, $newkey, $description, $images, $category, $userid, $conn) {
+function insertNews( $title, $newkey, $description, $images, $category, $userid, $conn ) {
     // Prepare SQL statement
     $stmt = $conn->prepare("INSERT INTO news (`title`, `newskey`, `description`, `images`, `category`, `userid`) VALUES (?, ?, ?, ?, ?, ?)");
 

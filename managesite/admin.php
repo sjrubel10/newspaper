@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="../assets/css/common.css">
     </head>
     <body>
-         <?php if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){?>
+         <?php if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 && $_SESSION['logged_in_user_data']['recorded'] ===1 ){?>
              <?php include_once "../views/header.php"?>
              <div class="container" id="adminContainer">
                 <div class="sidebar">

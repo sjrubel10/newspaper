@@ -47,3 +47,11 @@ function right_side_news_display( $right_side_news_data, $title, $divids='' ){
     return $right_side_news ;
 
 }
+
+function sanitize($input) {
+    // Remove leading and trailing whitespaces
+    $input = trim($input);
+    // Remove or encode potentially harmful characters
+    $input = filter_var($input, FILTER_SANITIZE_STRING);
+    return $input;
+}
