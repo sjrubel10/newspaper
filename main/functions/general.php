@@ -1,5 +1,6 @@
 <?php
 //$sql = "ALTER TABLE `users` ADD `admin_level` INT(2) NOT NULL DEFAULT '0' AFTER `admin`";
+//$sql = "ALTER TABLE `news` ADD `post_status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `recorded`";
 
 function news_category(){
     $categorys = array( 'Government','Sport', 'War', 'Politics', 'Education', 'Health', 'The environment',
