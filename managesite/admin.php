@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="adminassets/css/admin.css">
         <link rel="stylesheet" href="../assets/css/header.css">
         <link rel="stylesheet" href="../assets/css/common.css">
+        <script src="../assets/js/common.js"></script>
     </head>
     <body>
          <?php if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 && $_SESSION['logged_in_user_data']['recorded'] ===1 ){?>
@@ -52,4 +53,5 @@
          }?>
     </body>
     <script src="adminassets/js/admin.js"></script>
+
 </html>

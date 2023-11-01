@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $('.tab-content:first').addClass('active');
 
     $('ul li a').click(function () {
@@ -10,4 +10,4 @@ $(document).ready(function () {
         $(this).addClass('active');
         $(tab_id).addClass('active');
     });
-});
+});*/

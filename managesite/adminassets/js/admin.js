@@ -17,7 +17,8 @@ $( "#adminContainer" ).on( "click", ".managepost", function() {
     let action = splitResult[0];
     let postKey = splitResult[1];
 
-    $.post("../main/jsvalidation/jsmanagecontent.php",
+    $.post(
+        "../main/jsvalidation/jsmanagecontent.php",
         {
             action: action,
             postKey: postKey
