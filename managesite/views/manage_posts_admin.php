@@ -1,6 +1,63 @@
+<style>
+    .tabs {
+        display: flex;
+        justify-content: space-around;
+        background-color: #f2f2f2;
+        padding: 10px 0;
+    }
+
+    .tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.3s ease;
+    }
+
+    .tab:hover {
+        border-bottom: 2px solid #3498db;
+    }
+
+    .tab.active {
+        border-bottom: 2px solid #3498db;
+    }
+</style>
 <?php
 //ALTER TABLE `news` ADD `post_status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `recorded`;
+function make_tab_and_tab_holder_html( $page_title, $page_heading, $nav_names=[], $nav_holder_title_name=[] ){
+    $navs = '';
+    $nav_holders = '';
+    foreach ( $nav_names as $nav => $nav_data ){
+        $nav = trim( $nav );
+        $nav_holder_id = $nav.'_hilder';
+        $navs .= "<div id='$nav' class='tab'>$nav_data</div>";
+        $nav_holders .= "<div id='$nav_holder_id' class='tabContentHolder'>$nav_data</div>";
+    }
+    $tab_and_tab_holder_html = "<div class=''>
+        <h1> $page_heading </h1>
+        <div class='post-card_holde'>
+             <div class='tabs'>
+                $navs
+            </div>
+            <div class='tabsContentHolder'>
+                $nav_holders
+            </div>
+        </div>
+    </div>";
+    return $tab_and_tab_holder_html;
+}
+$nav_names = array(
+        'nav1'=>'Nav 1',
+        'nav2'=>'Nav 2',
+        'nav3'=>'Nav 3',
+        'nav4'=>'Nav 4',
+        'nav5'=>'Nav 5',
+        'nav6'=>'Nav 6',
+);
+echo make_tab_and_tab_holder_html( $page_title='', $page_heading = 'Manage Posts', $nav_names=[], $nav_holder_title_name=[] );
 ?>
+
 <h1> Manage Posts </h1>
 <div class="post-card_holde">
     <ul id="" class="managepostsul">
