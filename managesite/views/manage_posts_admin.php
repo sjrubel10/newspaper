@@ -61,7 +61,7 @@ $nav_names = array(
         'publish'=>'Published',
         'unpublish'=>'Unpublished',
         'private'=>'Private',
-        'deleteed'=>'Deleted'
+        'delete'=>'Deleted'
 );
 $clcikedClass = 'controlPost';
 $selected_class = 'adminNavSelect';
@@ -135,7 +135,8 @@ echo make_display_tab_and_tab_holder_html( $clcikedClass, 'Manage Posts', $nav_n
     let addSelectedClass = <?php echo json_encode( $selected_class )?>;
     let clickClassName = <?php echo json_encode( $clcikedClass )?>;
     let clickClassHolderIdName = 'adminContainer';
-    navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass );
+    let display_limit = 20;
+    navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass, display_limit );
 
 
 

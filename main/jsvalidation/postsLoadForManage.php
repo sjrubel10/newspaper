@@ -11,9 +11,13 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
         if ( $_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST) && !empty($_POST)) {
                 $action = sanitize($_POST['action']);
+                $limit = sanitize($_POST['limit']);
+                $loadedIds = sanitize($_POST['loadedIds']);
+                $type_of_post = get_type_of_post( $action );
+                $new_data = getNews_for_control( $limit, $type_of_post );
                 $result = array(
                     'success' => true,
-                    'data' => $_POST,
+                    'data' => $new_data,
                     'message' => "Successfully Fetch Data.",
                     'status_code' => 400
                 );

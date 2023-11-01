@@ -1,8 +1,7 @@
-function navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass ){
+function navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass, display_limit ){
     $("#"+clickClassHolderIdName).on("click","."+clickClassName+"",function() {
         let adminNavId = $(this).attr('id');
         let adminNavHolderId = adminNavId+'_holder';
-
         //Navigate tab and tab content
         $("#"+adminNavId).addClass(addSelectedClass);
         $("#"+adminNavId).siblings().removeClass(addSelectedClass);
@@ -10,20 +9,20 @@ function navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass
         $("#"+adminNavHolderId).siblings().hide();
         //End
 
-        let loadedIds =[{}];
+        let loadedIds ="";
         let end_point = "../main/jsvalidation/postsLoadForManage.php";
         let body_data = {
             action: adminNavId,
-            limit: 4,
+            limit: display_limit,
             loadedIds : loadedIds
         };
-        get_data_from_api( action, end_point, body_data );
+        get_data_from_api( end_point, body_data );
 
     });
 }
 
 
-function get_data_from_api( action, end_point, body_data ){
+function get_data_from_api( end_point, body_data ){
     $.post(
         end_point,
         body_data,
@@ -34,7 +33,8 @@ function get_data_from_api( action, end_point, body_data ){
                         console.log(result_data);
                         // $("#"+postKey).hide();
                     } else {
-                        alert("Non");
+                        console.log(result_data['error_code']);
+                        console.log(result_data['data']);
                     }
                 }catch (error) {
                     console.log(error);

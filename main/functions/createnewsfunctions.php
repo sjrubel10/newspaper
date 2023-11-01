@@ -20,6 +20,29 @@ function getNews( $conn, $limit, $category = false ){
         return [];
     }
 }
+function getNews_for_control( $limit, $action ){
+    $conn = $conn = Db_connect();
+    $post_status = $action['post_status'];
+    if( $action['recorded'] === 1 ){
+        $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`= $post_status ORDER BY id DESC LIMIT $limit";
+    }else{
+        $sql = "SELECT * FROM news WHERE `recorded`= 0 ORDER BY id DESC LIMIT $limit";
+    }
+    $result = $conn->query($sql);
+    if ( $result ) {
+        $newsRecords = array();
+        while ($row = $result->fetch_assoc()) {
+            $newsRecords[] = $row;
+        }
+        $conn->close();
+        // Return the retrieved records
+        return $newsRecords;
+    } else {
+        // Handle query error (you can log or return an error message)
+        $conn->close();
+        return [];
+    }
+}
 function getNews_search( $conn, $limit, $search = '' ){
     $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`=1 AND `title` LIKE '%$search%' ORDER BY id DESC LIMIT $limit";
     $result = $conn->query($sql);

@@ -56,3 +56,24 @@ function sanitize($input) {
     $input = filter_var($input, FILTER_SANITIZE_STRING);
     return $input;
 }
+
+function get_type_of_post( $action ){
+    if( $action === "delete" ){
+        $recorded = 0;
+        $post_status = 1;
+    }else if( $action === "private" ){
+        $recorded = 1;
+        $post_status = -1;
+    }else if( $action === "unpublish" ){
+        $recorded = 1;
+        $post_status = 0 ;
+    }else if( $action === "publish" ){
+        $recorded = 1;
+        $post_status = 1;
+    }else{
+        $recorded = 1;
+        $post_status = 1;
+    }
+
+    return $action =array( 'recorded' => $recorded, 'post_status' => $post_status );
+}
