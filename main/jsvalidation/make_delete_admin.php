@@ -12,25 +12,15 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             // Validate email format
             $result = 0;
             if (isset($_POST) && !empty($_POST)) {
-                $action = sanitize($_POST['action']);
-                $postKey = sanitize($_POST['postKey']);
-                $conn = Db_connect();
-
-                $post_id = fetchSingleValue( $postKey, $conn );
-                if ( is_numeric($post_id) ) {
-                    $update = updateRecordedStatus($post_id, $action );
-                    if ($update) {
-                        if ($action === "delete") {
-                            $message = 'Post Is Successfully Deleted';
-                        } else if ($action === "private") {
-                            $message = 'This Post Goes To Private Status';
-                        } else if ($action === "unpublish") {
-                            $message = 'Successfully Unpublished This Post';
-                        } else if ($action === "publish") {
-                            $message = 'Successfully Published This Post';
-                        } else {
-                            $message = 'Something Went Wrong!';
-                        }
+                $admin = (int)sanitize($_POST['admin']);
+                $userkey = sanitize($_POST['userkey']);
+                $admin_level = sanitize($_POST['admin_level']);
+                $deleteOrAdd = sanitize($_POST['deleteOrAdd']);
+                $user_id = getUserIdByProfileKey( $userkey );
+                if ( is_numeric( $user_id ) ) {
+                    $update =updateUserToAdmi( $user_id, $admin, $deleteOrAdd );
+                    if ( $update ) {
+                        $message = ' Successfully Made This Admin ';
                         $result = array(
                             'success' => true,
                             'message' => $message,
@@ -47,7 +37,7 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
                 } else {
                     $result = array(
                         'success' => false,
-                        'message' => "Post is not Exist.",
+                        'message' => "User is not Exist.",
                         'status_code' => 400
                     );
                 }

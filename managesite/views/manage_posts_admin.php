@@ -65,79 +65,42 @@ $nav_names = array(
 );
 $clcikedClass = 'controlPost';
 $selected_class = 'adminNavSelect';
-echo make_display_tab_and_tab_holder_html( $clcikedClass, 'Manage Posts', $nav_names, $selected_class );
+
 ?>
 <div class="post-card_holde">
-    <ul id="" class="managepostsul">
-        <h3> Published Posts </h3>
-        <?php if( count( $news )> 0 ){
-            foreach ( $news as $key => $new ){
-            ?>
-            <li id="<?php echo $new['newskey']?>" class="managepostsulli">
-                <h2><?php echo $new['title']?></h2>
-                <p class="managePostDescription"><?php echo $new['description']?></p>
-                <div class="actions" id="">
-                    <span class="action-btn managepost" id="edit"><i class="fas fa-edit"></i> <a class="leftnavlinktext" href="/newspaper/managesite/editnews.php?key=<?php echo $new['newskey']?>">Edit</a></span>
-                    <span class="action-btn managepost" id="unpublish_<?php echo $new['newskey']?>"><i class="fas fa-trash-alt"></i> Unpublish</span>
-                    <span class="action-btn managepost" id="delete_<?php echo $new['newskey']?>"><i class="fas fa-trash-alt"></i> Delete</span>
-                    <span class="action-btn managepost" id="private_<?php echo $new['newskey']?>"><i class="fas fa-lock"></i> Make Private</span>
-                </div>
-            </li>
-        <?php }
-        } ?>
-    </ul>
+    <?php echo make_display_tab_and_tab_holder_html( $clcikedClass, 'Manage Posts', $nav_names, $selected_class );?>
 </div>
 
 <script>
-    let news = [];
+    $(document).ready(function(){
+        let addSelectedClass = <?php echo json_encode( $selected_class )?>;
+        let clickClassName = <?php echo json_encode( $clcikedClass )?>;
+        let clickClassHolderIdName = 'adminContainer';
+        let display_limit = 20;
+        const display_type = 'display_news_control';
+        navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass, display_type, display_limit );
 
-    function get_post_according_to_action( action, newskey ){
-        if( action === 'Unpublish'){
-            allType = '<span class="action-btn managepost" id="publish_'+newskey+'"><i class="fas fa-trash-alt"></i> Publish</span>\
-                    <span class="action-btn managepost" id="delete_'+newskey+'"><i class="fas fa-trash-alt"></i> Delete</span>\
-                    <span class="action-btn managepost" id="private_'+newskey+'"><i class="fas fa-lock"></i> Make Private</span>'
-        }else if( action === 'Delete' ){
-            allType = '<span class="action-btn managepost" id="publish_'+newskey+'"><i class="fas fa-trash-alt"></i> Publish</span>\
-                    <span class="action-btn managepost" id="unpublish_'+newskey+'"><i class="fas fa-trash-alt"></i> Unpublish</span>\
-                    <span class="action-btn managepost" id="private_'+newskey+'"><i class="fas fa-lock"></i> Make Private</span>'
-        }else if(action === 'Private'){
-            allType = '<span class="action-btn managepost" id="publish_'+newskey+'"><i class="fas fa-trash-alt"></i> Publish</span>\
-                    <span class="action-btn managepost" id="unpublish_'+newskey+'"><i class="fas fa-trash-alt"></i> Unpublish</span>\
-                    <span class="action-btn managepost" id="delete_'+newskey+'"><i class="fas fa-lock"></i> Delete</span>'
-        }else{
-            allType = '';
-        }
-        return allType;
-    }
+        $( "#adminContainer" ).on( "click", ".managepost", function() {
+            let clickedID = $(this).attr('id').trim();
+            let splitResult = clickedID.split('_');
+            let action = splitResult[0];
+            let postKey = splitResult[1];
 
+            $.post(
+                "../main/jsvalidation/jsmanagecontent.php",
+                {
+                    action: action,
+                    postKey: postKey
+                },
+                function(data) {
+                    let result_data = JSON.parse( data );
+                    if ( result_data['success'] ) {
+                        $("#"+postKey).hide();
+                    } else {
+                        alert("Non");
+                    }
+                });
+        });
 
-    function dislay_posts_for_manages( news, action ){
-        let newskey = news['newskey'];
-        let allType = get_post_according_to_action( action, newskey );
-        let manageposts = '<li id=" '+news['newskey']+'" class="managepostsulli">\
-                                <h2>'+news['title']+'</h2>\
-                                <p class="managePostDescription">'+news['description']+'</p>\
-                                <div class="actions" id="">\
-                                    <span class="action-btn managepost" id="edit"><i class="fas fa-edit"></i> \
-                                        <a class="leftnavlinktext" href="/newspaper/managesite/editnews.php?key='+news['newskey']+'">Edit</a>\
-                                    </span>\
-                                    '+allType+'\
-                                </div>\
-                            </li>';
-        return manageposts;
-    }
-
-    let action = 'Unpublish'
-    let manageNewsLists = dislay_posts_for_manages( news, action );
-
-
-
-    let addSelectedClass = <?php echo json_encode( $selected_class )?>;
-    let clickClassName = <?php echo json_encode( $clcikedClass )?>;
-    let clickClassHolderIdName = 'adminContainer';
-    let display_limit = 20;
-    navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass, display_limit );
-
-
-
+    });
 </script>

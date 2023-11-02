@@ -16,21 +16,26 @@ if( count( $usersData ) > 0 ) {
                         </tr>
                     </thead>';
     foreach ($usersData as $key => $userData) {
+        if( $userData['admin'] == 1 ){
+            $is_checked = 'checked';
+        }else{
+            $is_checked = '';
+        }
         //    $usersDataHtml .= '<div class=""> <span class="">'.$userData['username'].'</span> </div>';
         $usersDataHtml .= '<tr id="user_' . $userData['userkey'] . '">
                                 <td>' . $userData['first_name'].' '.$userData['last_name']. '</td>
                                 <td>' . $userData['username'] . '</td>
                                 <td>' . $userData['mail'] . '</td>
-                                <td><input id="'.$userData['userkey'].'_checkbox" type="checkbox"></td>
+                                <td><input id="isAdmin_'.$userData['userkey'].'" type="checkbox" '.$is_checked.' ></td>
                                 <td>
-                                    <select id="'.$userData['userkey'].'select">
+                                    <select id="adminlevel_'.$userData['userkey'].'">
                                        <!--  <option value="1">Super Admin</option> -->
                                         <option value="2">Admin</option>
                                         <option value="3">Modaretor</option>
                                     </select>
                                 </td>
-                                <td><button>Delete</button></td>
-                                <td><button id="'.$userData['userkey'].'">Submit</button></td>
+                                <td><div class="removeFromAdmin" id="delete_'.$userData['userkey'].'">Delete</div></td>
+                                <td><div id="make_'.$userData['userkey'].'" class="makeAdminSubmit">Submit</div></td>
                             </tr>';
     }
 

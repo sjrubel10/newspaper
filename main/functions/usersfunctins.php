@@ -16,7 +16,7 @@ function getUserIdByProfileKey( $profileKey ) {
     $conn = Db_connect();
 
     // Use prepared statements to prevent SQL injection
-    $sql = "SELECT id FROM users WHERE profile_key = ?";
+    $sql = "SELECT id FROM users WHERE userkey = ?";
     $stmt = $conn->prepare($sql);
     if( $stmt ) {
         $stmt->bind_param("s", $profileKey);
@@ -141,4 +141,29 @@ function user_admin_status( $status_number ){
     );
 
     return $admis_status[$status_number];
+}
+
+function updateUserToAdmi( $userid, $admin, $action ) {
+    $conn = Db_connect();
+    $result = false;
+    if( $action === "makeAdmin" ) {
+        $sql = " UPDATE `users` SET `admin` = $admin, `recorded` = 1 WHERE `id` = ?";
+    }else if( $action === "removeAdmin" ){
+        $sql = " UPDATE `users` SET `admin` = $admin, `recorded` = 1 WHERE `id` = ?";
+    }else{
+        return $result;
+    }
+    // Create a prepared statement
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error in the prepared statement: " . $conn->error);
+    }
+    // Bind the parameter
+    $stmt->bind_param("i", $userid ); // "i" represents an integer
+    // Execute the statement
+    $result = $stmt->execute();
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+    return $result;
 }

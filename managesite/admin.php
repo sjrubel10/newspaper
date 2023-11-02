@@ -3,7 +3,7 @@
     $conn = Db_connect();
     $display_limit = 20;
     $usersData = getUsersData( $conn, $display_limit );
-    $news = getNews( $conn, $display_limit );
+//    $news = getNews( $conn, $display_limit );
 //    var_test_die( $news );
 ?>
 <!DOCTYPE html>

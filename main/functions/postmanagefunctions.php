@@ -32,13 +32,13 @@ function updateRecordedStatus( $postId, $action ) {
     $conn = Db_connect();
     $result = false;
     if( $action === "delete" ){
-        $sql = " UPDATE `news` SET `recorded` = 0 WHERE `id` = ?";
+        $sql = " UPDATE `news` SET `post_status` = 0, `recorded` = 0 WHERE `id` = ?";
     }else if( $action === "private" ){
-        $sql = " UPDATE `news` SET `post_status` = -1 WHERE `id` = ?";
+        $sql = " UPDATE `news` SET `post_status` = -1, `recorded` = 1 WHERE `id` = ?";
     }else if( $action === "unpublish" ){
-        $sql = " UPDATE `news` SET `post_status` = 0 WHERE `id` = ?";
+        $sql = " UPDATE `news` SET `post_status` = 0, `recorded` = 1 WHERE `id` = ?";
     }else if( $action === "publish" ){
-        $sql = " UPDATE `news` SET `post_status` = 1 WHERE `id` = ?";
+        $sql = " UPDATE `news` SET `post_status` = 1, `recorded` = 1 WHERE `id` = ?";
     }else{
         return $result;
     }

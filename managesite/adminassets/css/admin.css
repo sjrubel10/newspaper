@@ -122,6 +122,10 @@ p {
     height: 20px;
     overflow: hidden;
 }
+.makeAdminSubmit{
+    cursor: pointer;
+
+}
 
 @keyframes fadeIn {
     from {
