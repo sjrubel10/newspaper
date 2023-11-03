@@ -121,3 +121,39 @@ function insertNews( $title, $newkey, $description, $images, $category, $userid,
     $stmt->close();
     return $result;
 }
+
+function updateNews( $title, $description, $images, $category, $newskey ) {
+    $conn = Db_connect();
+    // Prepare SQL statement for update
+    $stmt = $conn->prepare("UPDATE news SET `title`=?, `description`=?, `images`=?, `category`=? WHERE `newskey`=?");
+    if (!$stmt) {
+        // Handle the prepare error
+        $result = array(
+            'success' => false,
+            'message' => "Prepare error: " . $conn->error,
+            'status_code' => 500 // You can choose an appropriate status code
+        );
+        return $result;
+    }
+    // Bind parameters and execute the statement
+    $stmt->bind_param("sssss", $title, $description, $images, $category, $newskey );
+
+    if ($stmt->execute()) {
+        $result = array(
+            'success' => true,
+            'message' => "Record updated successfully",
+            'status_code' => 200 // Use 200 OK status code for successful update
+        );
+    } else {
+        $result = array(
+            'success' => false,
+            'message' => "Error: " . $stmt->error,
+            'status_code' => 500 // Use 500 Internal Server Error for database error
+        );
+    }
+
+    // Close the statement
+    $stmt->close();
+    return $result;
+}
+
