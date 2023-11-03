@@ -20,7 +20,12 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
                 if ( is_numeric( $user_id ) ) {
                     $update =updateUserToAdmi( $user_id, $admin, $deleteOrAdd );
                     if ( $update ) {
-                        $message = ' Successfully Made This Admin ';
+                        if( $admin === 1 ){
+                            $message = 'Successfully Added This User Admin';
+                        }else{
+                            $message = 'Successfully Removed From Admin';
+                        }
+
                         $result = array(
                             'success' => true,
                             'message' => $message,

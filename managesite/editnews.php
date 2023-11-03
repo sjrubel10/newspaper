@@ -35,7 +35,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     </head>
     <body>
     <?php include_once "../views/header.php"?>
-    <h1 class="createNewsTitle">Create News</h1>
+    <h1 class="createNewsTitle">Edit News</h1>
     <div class="formHolder">
         <div class="form-container">
             <form id="news-form" enctype="multipart/form-data">
@@ -66,7 +66,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/createnew.js"></script>
+    <script src="../assets/js/editnews.js"></script>
     </body>
     </html>
 <?php }

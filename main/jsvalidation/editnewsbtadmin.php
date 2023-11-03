@@ -16,12 +16,12 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             $targetFile = $targetDir . $imageFileName;
             $result = insertNews( $title, $newkey, $description, $imageFileName, $category, $userid, $conn );
             move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
-        //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
+            //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
         } else {
             $result = array(
-                    'success' => false,
-                    'message'=>"Post is not valid",
-                    'status_code'=>303
+                'success' => false,
+                'message'=>"Post is not valid",
+                'status_code'=>303
             );
         }
     }else{
@@ -40,4 +40,5 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
 }
 echo json_encode( $result );
 ?>
+
 

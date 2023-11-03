@@ -97,7 +97,7 @@ $selected_class = 'adminNavSelect';
                     if ( result_data['success'] ) {
                         $("#"+postKey).hide();
                     } else {
-                        alert("Non");
+                        console.log("Non");
                     }
                 });
         });
