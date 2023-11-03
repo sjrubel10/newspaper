@@ -29,6 +29,9 @@ body {
     text-align: center;
     margin: auto;
 }
+#description{
+    min-height: 350px;
+}
 
 h2 {
     margin-bottom: 20px;
