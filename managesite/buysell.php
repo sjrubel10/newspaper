@@ -5,6 +5,8 @@
 /*$create_table_sal = "CREATE TABLE `movie`.`buysell` ( `ID` INT(11) NOT NULL AUTO_INCREMENT , `send_method` VARCHAR(128) NOT NULL , `receive_method` VARCHAR(128) NOT NULL , `send_amount` INT(11) NOT NULL , `receive_amount` INT(11) NOT NULL , `bKash_number` INT(15) NOT NULL , `bKash_tRX _ID` INT(28) NOT NULL , `skrill_email` VARCHAR(128) NOT NULL , `contact_no` INT(15) NOT NULL , `user_id` INT(11) NOT NULL , `recorded` TINYINT(1) NOT NULL DEFAULT '1' , `is_transaction_done` TINYINT(1) NOT NULL DEFAULT '0' , `admin_id` INT(11) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB";
 
 ALTER TABLE `buysell` CHANGE `admin_id` `admin_id` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `buysell` ADD `transaction_type` VARCHAR(8) NULL DEFAULT NULL AFTER `user_id`;
+ALTER TABLE `buysell` ADD `transaction_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `admin_id`;
 */
 
 //echo "Here";

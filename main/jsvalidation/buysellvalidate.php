@@ -3,7 +3,8 @@ require_once "../init.php";
 if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
         if ( $_SERVER["REQUEST_METHOD"] == "POST") {
             if( isset( $_POST )){
-                $result = insertData( $_POST );
+                $user_id = 1;
+                $result = insertBuyData( $_POST , $user_id );
                 $conn = Db_connect();
             }else{
                 $result = array(
