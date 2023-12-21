@@ -16,7 +16,7 @@ function display_news_card( $news ){
             $new_card .= '<a class="newLinka" href="/newspaper/news.php?key=' . $article['newskey'] . '&title=' . $slug . '"><div class="card"> ';
             $new_card .= $imageLink;
             $new_card .= '<div class="card-content">';
-            $new_card .= '<h4>' . $article['title'] . '</h4>';
+            $new_card .= '<h2>' . $article['title'] . '</h2>';
             $new_card .= '<div class="category">Category: ' . $article['category'] . '</div>';
             $new_card .= '<p>' . $article['description'] . '</p>';
             $new_card .= '</div>';

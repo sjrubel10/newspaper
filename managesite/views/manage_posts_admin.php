@@ -25,10 +25,13 @@
 </style>
 <?php
 //ALTER TABLE `news` ADD `post_status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `recorded`;
-function make_display_tab_and_tab_holder_html( $clcikedClass, $page_heading, $nav_names=[], $selected_class ){
+function make_display_tab_and_tab_holder_html( $clcikedClass, $page_heading, $nav_names, $selected_class ){
     $navs = '';
     $nav_holders = '';
     $i = 0;
+    if( count( $nav_names )< 1 ){
+        return "";
+    }
     foreach ( $nav_names as $nav => $nav_data ){
 
         if( $i === 0 ){

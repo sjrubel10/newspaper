@@ -18,6 +18,19 @@ body {
     padding: 20px;
     margin: auto;
 }
+.news-description{
+    position: relative;
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    text-align: justify;
+    line-height: 20px;
+    font-size: 14px;
+    color: #333;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: pre-wrap !important;
+}
 
 .news-details {
     margin-bottom: 20px;
