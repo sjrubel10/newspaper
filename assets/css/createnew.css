@@ -31,6 +31,21 @@ body {
 }
 #description{
     min-height: 350px;
+    line-height: 18px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    color: #666666;
+}
+#title{
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    color: #444444;
 }
 
 h2 {
@@ -50,7 +65,7 @@ label {
     margin-bottom: 8px;
 }
 
-input[type="text"], textarea, input[type="file"] {
+ textarea, input[type="file"] {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
