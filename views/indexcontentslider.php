@@ -7,9 +7,6 @@ $slidingimages = array(
 ?>
 <div class="slideShowContainerHolder">
     <div class="slideShowContainer">
-        <h2>Automatic Slideshow</h2>
-        <p>Change image every 3 seconds:</p>
-
         <div class="slideshow-container">
             <?php foreach ( $slidingimages as $slidingimage ){?>
             <div class="mySlides fade">
@@ -19,24 +16,10 @@ $slidingimages = array(
                     <h1>Heading</h1>
                     <p>Lorem ipsum..</p>
                 </div>
-<!--                <div class="text">Caption Text</div>-->
             </div>
             <?php }?>
-
-            <!--<div class="mySlides fade">
-                <div class="numbertext">2 / 3</div>
-                <img src="assets/uploads/images/slideImages/img_nature_wide.jpeg" style="width: 100%;" alt="Snow" />
-                <div class="text">Caption Two</div>
-            </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 3</div>
-                <img src="assets/uploads/images/slideImages/img_snow_wide.jpeg" style="width: 100%;" alt="Mountains" />
-                <div class="text">Caption Three</div>
-            </div>-->
         </div>
-        <br />
-        <div style="text-align: center;">
+        <div style="text-align: center">
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
