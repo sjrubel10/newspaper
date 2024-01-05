@@ -23,6 +23,7 @@ if( count($news) < 1 ){
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/indexcontentslider.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -33,6 +34,7 @@ if( count($news) < 1 ){
             <?php include "views/leftnavbar.php"?>
         </div>
         <div class="maincontentHolder">
+            <?php include "views/indexcontentslider.php"?>
             <?php include "views/indexcontent.php"?>
         </div>
         <div class="rightsideHolder">
