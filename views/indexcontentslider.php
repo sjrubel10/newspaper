@@ -4,30 +4,38 @@ $slidingimages = array(
         1=>"assets/uploads/images/slideImages/img_nature_wide.jpeg",
         2=>"assets/uploads/images/slideImages/img_snow_wide.jpeg",
 );
+function display_sliding_images( $slidingimages ): string
+{
+    $display_images = '';
+    $sliding_images = '';
+    $sliding_dots = '';
+    $images_holder  = '<div class="slideshow-container">';
+    $dots_holder    = '<div class="slidDotsHolder" style="text-align: center">';
+    $div_close      = '</div>';
+    foreach ( $slidingimages as $slidingimage ){
+        $sliding_images .= '<div class="mySlides fade" style="display:none;">
+                                <div class="numbertext">1 / 3</div>
+                                <img class="slidingImage" src="'.$slidingimage.'" alt="Nature" />
+                                <div class="content">
+                                    <h1>Heading</h1>
+                                    <p>Lorem ipsum..</p>
+                                </div>
+                            </div>';
+        $sliding_dots .= '<span class="dot"></span>';
+    }
+
+    $display_images .= $images_holder.$sliding_images.$div_close.$dots_holder.$sliding_dots.$div_close;
+
+    return $display_images;
+}
 ?>
 <div class="slideShowContainerHolder">
     <div class="slideShowContainer">
-        <div class="slideshow-container">
-            <?php foreach ( $slidingimages as $slidingimage ){?>
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img class="slidingImage" src="<?php echo $slidingimage?>" style="width: 100%;" alt="Nature" />
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Lorem ipsum..</p>
-                </div>
-            </div>
-            <?php }?>
-        </div>
-        <div style="text-align: center">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
+        <?php echo display_sliding_images( $slidingimages ); ?>
     </div>
     <div class="addSectionHolder">
         <div class="">
-            Ads
+            <img class="adsImage" alt="ads images" src="../assets/uploads/ads/ads1.jpeg">
         </div>
     </div>
 
@@ -68,7 +76,7 @@ $slidingimages = array(
 
         const intervalId = setInterval(function() {
             showSlides(slideIndex + 1);
-        }, 5000);
+        }, 6000);
 
         $(".dot").click(function() {
             const index = $(this).index() + 1;
