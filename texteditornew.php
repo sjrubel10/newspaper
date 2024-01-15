@@ -1,3 +1,41 @@
+<?php
+
+function rich_text_editor_toolox_display( $editorId )
+{
+    $left = 'left';
+    $center = 'center';
+    $right = 'right';
+    $text_editor = "<div class='toolbar'>
+                        <button id='bold-button' class='box_padding' onclick='toggleBold( event )'><i class='fas fa-bold'></i></button>
+                        <button id='italic-button' class='box_padding' onclick='toggleItalic()'><i class='fas fa-italic'></i></button>
+                        <button id='underline-button' class='box_padding' onclick='toggleUnderline()'><i class='fas fa-underline'></i></button>
+                        <button id='p-button' class='box_padding' onclick='insertParagraph()'><i class='fas fa-paragraph'></i></button>
+                        <button id='h1-button' class='box_padding' onclick='insertHeading(1)'><i class='fas fa-heading'></i>1</button>
+                        <button id='h2-button' class='box_padding' onclick='insertHeading(2)'><i class='fas fa-heading'></i>2</button>
+                        <input type='color' class='color_picker' id='text-color-picker'>
+                    
+                        <button id='multiply-button' class='box_padding' onclick='insertSuperscript(2)'><i class='fas fa-superscript'></i>2</button>
+                        <button id='cube-button' class='box_padding' onclick='insertSuperscript(3)'><i class='fas fa-superscript'></i>3</button>
+                        <button id='square-root-button' class='box_padding' onclick='insertSquareRoot()'><i class='fas fa-square-root-alt'></i></button>
+                    
+                        <button id='left-align-button' class='box_padding' onclick='alignText(\"$left\")'><i class='fas fa-align-left'></i></button>
+                        <button id='center-align-button' class='box_padding' onclick='alignText(\"$center\")'><i class='fas fa-align-center'></i></button>
+                        <button id='right-align-button' class='box_padding' onclick='alignText(\"$right\")'><i class='fas fa-align-right'></i></button>
+                        
+                        <button id='ordered-list-button' class='box_padding' onclick='insertOrderedList()'><i class='fas fa-list-ol'></i></button>
+                        <button id='link-button' class='box_padding' onclick='insertLink()'><i class='fas fa-link'></i></button>
+                        <button id='unlink-button' class='box_padding' onclick='unlink()'><i class='fas fa-unlink'></i></button>
+                    
+                        <button id='insert_image' onclick='insertImage()'><i class='fas fa-image'></i></button>
+                        <button id='insert_table' onclick='insertTable()'><i class='fas fa-table'></i></button>
+                    
+                        <button id='clean-button' class='box_padding' onclick='cleanContent(\"$editorId\")'><i class='fas fa-trash'></i></button>
+                    </div>";
+
+    return $text_editor;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +55,7 @@
             margin: 20px auto;
         }
 
-        #editor {
+        .text_editor {
             border: 1px solid #ccc;
             min-height: 300px;
             padding: 10px;
@@ -30,28 +68,23 @@
             background-color: #f5f5f5;
             padding: 10px;
         }
-
         .toolbar button {
             background: none;
             border: none;
             cursor: pointer;
             padding: 5px;
         }
-
         .toolbar button:hover {
             background-color: #ddd;
         }
-
-        #editor table {
+        .text_editor table {
             border-collapse: collapse;
             width: 100%;
         }
-
-        #editor table, #editor th, #editor td {
+        .text_editor table, .text_editor th, .text_editor td {
             border: 1px solid #ddd;
         }
-
-        #editor th, #editor td {
+        .text_editor th, .text_editor td {
             padding: 8px;
             text-align: left;
         }
@@ -60,34 +93,11 @@
 <body>
 
 <div class="editor-container">
-    <div class="toolbar">
-        <button id="bold-button" class="box_padding" onclick="toggleBold()"><i class="fas fa-bold"></i></button>
-        <button id="italic-button" class="box_padding" onclick="toggleItalic()"><i class="fas fa-italic"></i></button>
-        <button id="underline-button" class="box_padding" onclick="toggleUnderline()"><i class="fas fa-underline"></i></button>
-        <button id="p-button" class="box_padding" onclick="insertParagraph()"><i class="fas fa-paragraph"></i></button>
-        <button id="h1-button" class="box_padding" onclick="insertHeading(1)"><i class="fas fa-heading"></i>1</button>
-        <button id="h2-button" class="box_padding" onclick="insertHeading(2)"><i class="fas fa-heading"></i>2</button>
-        <input type="color" class="color_picker" id="text-color-picker">
 
-        <button id="multiply-button" class="box_padding" onclick="insertSuperscript(2)"><i class="fas fa-superscript"></i>2</button>
-        <button id="cube-button" class="box_padding" onclick="insertSuperscript(3)"><i class="fas fa-superscript"></i>3</button>
-        <button id="square-root-button" class="box_padding" onclick="insertSquareRoot()"><i class="fas fa-square-root-alt"></i></button>
-
-        <button id="left-align-button" class="box_padding" onclick="alignText('left')"><i class="fas fa-align-left"></i></button>
-        <button id="center-align-button" class="box_padding" onclick="alignText('center')"><i class="fas fa-align-center"></i></button>
-        <button id="right-align-button" class="box_padding" onclick="alignText('right')"><i class="fas fa-align-right"></i></button>
-        <button id="ordered-list-button" class="box_padding" onclick="insertOrderedList()"><i class="fas fa-list-ol"></i></button>
-
-        <button id="link-button" class="box_padding" onclick="insertLink()"><i class="fas fa-link"></i></button>
-        <button id="unlink-button" class="box_padding" onclick="unlink()"><i class="fas fa-unlink"></i></button>
-
-        <button id="insert_image" onclick="insertImage()"><i class="fas fa-image"></i></button>
-        <button id="insert_table" onclick="insertTable()"><i class="fas fa-table"></i></button>
-
-        <button id="clean-button" class="box_padding" onclick="cleanContent()"><i class="fas fa-trash"></i></button>
-    </div>
-
-    <div id="editor" contenteditable="true"><p>Text Something</p></div>
+    <?php
+    $editorId = 'editor';
+    echo rich_text_editor_toolox_display( $editorId ); ?>
+    <div id="<?php echo $editorId;?>" class="text_editor" contenteditable="true"><p>Text Something</p></div>
 </div>
 
 <div class="btnholder" id="btnholder">
@@ -173,13 +183,13 @@
         document.execCommand("foreColor", false, color);
     });
 
-    function cleanContent() {
-        var content = $("#editor").html();
+    function cleanContent( editorId ) {
+        var content = $("#"+editorId).html();
         content = content.replace(/<style>[\s\S]*?<\/style>/gi, '');
         content = $("<textarea/>").html(content).text();
         content = content.replace(/<[^>]+>/g, '');
         var result = '<p>' + content + '</p>';
-        $("#editor").html(result);
+        $("#"+editorId).html(result);
     }
 
 
