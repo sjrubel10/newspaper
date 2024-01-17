@@ -154,21 +154,6 @@ function display_rich_text_editor_toolbar(){
             $(this).html("<p>" + sanitizedContent + "</p>");*/
         });
 
-        $('body').on('click', '#clean-button', function( event ) {
-            event.preventDefault();
-            var content = $("#editor").html();
-            // Remove CSS styles (within <style> tags)
-            content = content.replace(/<style>[\s\S]*?<\/style>/gi, '');
-            // Remove HTML entities
-            content = $("<textarea/>").html(content).text();
-            // Remove all HTML tags
-            content = content.replace(/<[^>]+>/g, '');
-            // Wrap the clean text in a <p> tag
-            var result = '<p>' + content + '</p';
-            // Replace the content of the div with the cleaned HTML
-            $("#editor").html(result);
-        });
-
         function make_edit( event, action, arg1, arg2 ){
             event.preventDefault();
             document.execCommand( action, arg1, arg2);
@@ -317,6 +302,21 @@ function display_rich_text_editor_toolbar(){
 
         $('body').on('click', '#insert_table', function( event ) {
             insertTable( event );
+        });
+
+        $('body').on('click', '#clean-button', function( event ) {
+            event.preventDefault();
+            var content = $("#editor").html();
+            // Remove CSS styles (within <style> tags)
+            content = content.replace(/<style>[\s\S]*?<\/style>/gi, '');
+            // Remove HTML entities
+            content = $("<textarea/>").html(content).text();
+            // Remove all HTML tags
+            content = content.replace(/<[^>]+>/g, '');
+            // Wrap the clean text in a <p> tag
+            var result = '<p>' + content + '</p';
+            // Replace the content of the div with the cleaned HTML
+            $("#editor").html(result);
         });
         function insertImage( event ) {
             event.preventDefault();
