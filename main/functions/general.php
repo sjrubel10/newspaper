@@ -49,6 +49,9 @@ function right_side_news_display( $right_side_news_data, $title, $divids='' ){
 
 }
 
+function sanitize_with_html( $input ) {
+    return htmlentities( $input, ENT_QUOTES, 'UTF-8');
+}
 function sanitize($input) {
     // Remove leading and trailing whitespaces
     $input = trim($input);
@@ -104,4 +107,17 @@ function display_rich_text_editor_toolbar(){
             </div>";
 
     return $toolbar;
+}
+
+function strip_html_css( $htmlString ) {
+    // Remove HTML tags
+    $htmlString = strip_tags($htmlString);
+
+    // Remove inline CSS styles
+    $htmlString = preg_replace('/style=("|\').*?("|\')/', '', $htmlString);
+
+    // Remove CSS blocks
+    $htmlString = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $htmlString);
+
+    return $htmlString;
 }
