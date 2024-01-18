@@ -1,6 +1,7 @@
 <?php
 require_once "../init.php";
 if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
+
     if( $_SESSION['logged_in_user_data']['admin']=== 1 ) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = isset($_POST["title"]) ? trim($_POST["title"]):"";
@@ -17,6 +18,11 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             $result = insertNews( $title, $newkey, $description, $imageFileName, $category, $userid, $conn );
             move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
         //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
+            $result = array(
+                'success' => false,
+                'message'=>"Post is not valid",
+                'status_code'=>303
+            );
         } else {
             $result = array(
                     'success' => false,

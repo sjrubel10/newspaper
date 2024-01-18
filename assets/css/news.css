@@ -32,6 +32,15 @@ body {
     white-space: pre-wrap !important;
 }
 
+p {
+    margin: 5px;
+    padding: 0;
+}
+p {
+    font-size: inherit;
+    line-height: inherit;
+}
+
 .news-details {
     margin-bottom: 20px;
 }

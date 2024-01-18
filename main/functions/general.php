@@ -78,37 +78,30 @@ function get_type_of_post( $action ){
     return $action =array( 'recorded' => $recorded, 'post_status' => $post_status );
 }
 
-function rich_text_editor_toolox_display( $editorId )
-{
-    $left = 'left';
-    $center = 'center';
-    $right = 'right';
-    $text_editor = "<div class='toolbar'>
-                        <button id='bold-button' class='box_padding' onclick='toggleBold()'><i class='fas fa-bold'></i></button>
-                        <button id='italic-button' class='box_padding' onclick='toggleItalic()'><i class='fas fa-italic'></i></button>
-                        <button id='underline-button' class='box_padding' onclick='toggleUnderline()'><i class='fas fa-underline'></i></button>
-                        <button id='p-button' class='box_padding' onclick='insertParagraph()'><i class='fas fa-paragraph'></i></button>
-                        <button id='h1-button' class='box_padding' onclick='insertHeading(1)'><i class='fas fa-heading'></i>1</button>
-                        <button id='h2-button' class='box_padding' onclick='insertHeading(2)'><i class='fas fa-heading'></i>2</button>
-                        <input type='color' class='color_picker' id='text-color-picker'>
-                    
-                        <button id='multiply-button' class='box_padding' onclick='insertSuperscript(2)'><i class='fas fa-superscript'></i>2</button>
-                        <button id='cube-button' class='box_padding' onclick='insertSuperscript(3)'><i class='fas fa-superscript'></i>3</button>
-                        <button id='square-root-button' class='box_padding' onclick='insertSquareRoot()'><i class='fas fa-square-root-alt'></i></button>
-                    
-                        <<button id='left-align-button' class='box_padding' onclick='alignText(\"$left\")'><i class='fas fa-align-left'></i></button>
-                        <button id='center-align-button' class='box_padding' onclick='alignText(\"$center\")'><i class='fas fa-align-center'></i></button>
-                        <button id='right-align-button' class='box_padding' onclick='alignText(\"$right\")'><i class='fas fa-align-right'></i></button>
-                        
-                        <button id='ordered-list-button' class='box_padding' onclick='insertOrderedList()'><i class='fas fa-list-ol'></i></button>
-                        <button id='link-button' class='box_padding' onclick='insertLink()'><i class='fas fa-link'></i></button>
-                        <button id='unlink-button' class='box_padding' onclick='unlink()'><i class='fas fa-unlink'></i></button>
-                    
-                        <button id='insert_image' onclick='insertImage()'><i class='fas fa-image'></i></button>
-                        <button id='insert_table' onclick='insertTable()'><i class='fas fa-table'></i></button>
-                    
-                        <button id='clean-button' class='box_padding' onclick='cleanContent(\"$editorId\")'><i class='fas fa-trash'></i></button>
-                    </div>";
+function display_rich_text_editor_toolbar(){
+    $toolbar = "<div id='editortoolbar' class='toolbar' style='display:none;'>
+                <button id='bold-button' class='box_padding'><i class='fas fa-bold'></i></button>
+                <button id='italic-button' class='box_padding'><i class='fas fa-italic'></i></button>
+                <button id='underline-button' class='box_padding'><i class='fas fa-underline'></i></button>
+                <button id='p-button' class='box_padding'><i class='fas fa-paragraph'></i></button>
+                <button id='h1-button' class='box_padding'><i class='fas fa-heading'></i>1</button>
+                <button id='h2-button' class='box_padding'><i class='fas fa-heading'></i>2</button>
+                <input type='color' class='color_picker' id='text-color-picker'>
+            
+                <button id='multiply-button' class='box_padding'><i class='fas fa-superscript'></i>2</button>
+                <button id='cube-button' class='box_padding'><i class='fas fa-superscript'></i>3</button>
+                <button id='square-root-button' class='box_padding'><i class='fas fa-square-root-alt'></i></button>
+            
+                <button id='left-align-button' class='box_padding'><i class='fas fa-align-left'></i></button>
+                <button id='center-align-button' class='box_padding'><i class='fas fa-align-center'></i></button>
+                <button id='right-align-button' class='box_padding'><i class='fas fa-align-right'></i></button>
+                <button id='ordered-list-button' class='box_padding'><i class='fas fa-list-ol'></i></button>
+                <button id='link-button' class='box_padding'><i class='fas fa-link'></i></button>
+                <button id='unlink-button' class='box_padding'><i class='fas fa-unlink'></i></button>
+                <button id='insert_image'><i class='fas fa-image'></i></button>
+                <button id='insert_table'><i class='fas fa-table'></i></button>
+                <button id='clean-button' class='box_padding'><i class='fas fa-trash'></i></button>
+            </div>";
 
-    return $text_editor;
+    return $toolbar;
 }

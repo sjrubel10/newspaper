@@ -1,12 +1,15 @@
-.editor-container {
+body {
     font-family: 'Arial', sans-serif;
+}
+
+.editor-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin: 20px auto;
 }
 
-#editor {
+.editor {
     border: 1px solid #ccc;
     min-height: 300px;
     padding: 10px;
@@ -28,14 +31,32 @@
 .toolbar button:hover {
     background-color: #ddd;
 }
-#editor table {
+.color_picker{
+    width: 25px;
+    height: 20px;
+}
+
+.editor table {
     border-collapse: collapse;
     width: 100%;
 }
-#editor table, #editor th, #editor td {
+.editor img {
+    max-width: 100%;
+}
+.editor table, .text_editor th, .editor td {
     border: 1px solid #ddd;
 }
-#editor th, #editor td {
+.editor th, .editor td {
     padding: 8px;
     text-align: left;
+}
+.editor-container p{
+    margin: 0px;
+}
+
+.editorText{
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
 }
