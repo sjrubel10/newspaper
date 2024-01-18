@@ -39,9 +39,9 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
             <div class="news-image">
                 <?php echo $imageLink?>
             </div>
-            <p class="news-description">
+<!--            <p class="news-description">-->
                 <?php echo $newData['description']?>
-            </p>
+<!--            </p>-->
         </div>
 
         <div class="comment-box">

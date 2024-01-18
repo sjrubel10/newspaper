@@ -4,10 +4,10 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
 
     if( $_SESSION['logged_in_user_data']['admin']=== 1 ) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $title = isset($_POST["title"]) ? trim($_POST["title"]):"";
+            $title = isset($_POST["title"]) ? ucwords ( sanitize( trim( $_POST["title"] ) ) ):"";
             $newkey = substr(md5($title), 0, 8);;
-            $description = isset($_POST["description"]) ? $_POST["description"]: "";
-            $category = isset($_POST["category"]) ? $_POST["category"]:"";
+            $description = $_POST["description"] ?? "";
+            $category = isset( $_POST["category"]) ? sanitize( $_POST["category"] ):"";
             $userid = 1;
             $conn = Db_connect();
             // Handle image upload

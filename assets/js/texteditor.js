@@ -256,8 +256,6 @@ $(document).ready(function() {
         });
         let textContent = document.getElementById( editorId).innerHTML;
         // var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
-
-
         return textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
 
     }
