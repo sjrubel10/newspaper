@@ -255,10 +255,10 @@ $(document).ready(function() {
             $(this).replaceWith("<p>" + $(this).html() + "</p>");
         });
         let textContent = document.getElementById( editorId).innerHTML;
-        var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
+        // var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
 
 
-        return updatedContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
+        return textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
 
     }
 
