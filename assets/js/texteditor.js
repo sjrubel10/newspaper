@@ -1,16 +1,15 @@
-$(document).ready(function() {
-
-    let isClicked = 0
-    $('#editor').on('focus', function() {
-        if( isClicked === 0 ){
-            $("#editorText").after( display_rich_text_editor_toolbar() );
-            $("#editortoolbar").fadeIn(1000);
-        }
-        isClicked++;
+function get_text_from_rich_text_editor( editorId ) {
+    $("#"+editorId+ "div").each(function () {
+        $(this).replaceWith("<p>" + $(this).html() + "</p>");
     });
+    let textContent = document.getElementById( editorId).innerHTML;
+    // var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
 
-    function display_rich_text_editor_toolbar() {
-        let toolbar = "<div class='toolbar'>\
+    return textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
+}
+
+function display_rich_text_editor_toolbar() {
+    let toolbar = "<div class='toolbar'>\
                             <button id='bold-button' class='box_padding btnClickedClass'><i class='fas fa-bold'></i></button>\
                             <button id='italic-button' class='box_padding btnClickedClass'><i class='fas fa-italic'></i></button>\
                             <button id='underline-button' class='box_padding btnClickedClass'><i class='fas fa-underline'></i></button>\
@@ -32,8 +31,19 @@ $(document).ready(function() {
                             <button id='clean-button' class='box_padding btnClickedClass'><i class='fas fa-trash'></i></button>\
                         </div>";
 
-        return toolbar;
-    }
+    return toolbar;
+}
+
+$(document).ready(function() {
+
+    let isClicked = 0
+    $('#editor').on('focus', function() {
+        if( isClicked === 0 ){
+            $("#editorText").after( display_rich_text_editor_toolbar() );
+            $("#editortoolbar").fadeIn(1000);
+        }
+        isClicked++;
+    });
 
     $("#editor").on("input", function() {
         /*var editorContent = $(this).html();
@@ -250,17 +260,9 @@ $(document).ready(function() {
 
     });
 
-    function get_text_from_rich_text_editor( editorId ) {
-        $("#"+editorId+ "div").each(function () {
-            $(this).replaceWith("<p>" + $(this).html() + "</p>");
-        });
-        let textContent = document.getElementById( editorId).innerHTML;
-        // var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
-        return textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
 
-    }
 
-    $("#news-form").submit(function(event) {
+    $("#news-form1").submit(function(event) {
         event.preventDefault();
         // var formData = new FormData($(this)[0]);
         var formData = new FormData(this);

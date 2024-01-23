@@ -28,7 +28,7 @@
         ],
 
     );
-    echo right_side_news_display( $news, "Popular News" );
+    echo right_side_news_display( $popular, "Popular News" );
     echo right_side_news_display( $cardData, "Latest News" );
     ?>
 

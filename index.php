@@ -13,6 +13,8 @@ if( isset( $_GET['category'] ) && !empty( $_GET['category'] ) ){
 if( count($news) < 1 ){
     $news = [];
 }
+
+$popular = array_slice($news, 0, 5);
 ?>
 <!DOCTYPE html>
 <html lang="en">

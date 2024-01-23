@@ -29,7 +29,6 @@ $categorys = news_category();
 
                     <div class="editor-container" id="editor-container">
                         <span class="editorText" id="editorText">Description</span>
-                <!--        --><?php //echo display_rich_text_editor_toolbar(); ?>
                         <div contenteditable="true" class="editor" id="editor">
                             <p>Write Something Here </p>
                         </div>

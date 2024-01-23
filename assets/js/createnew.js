@@ -1,8 +1,24 @@
 $(document).ready(function() {
+
+    /*function get_text_from_rich_text_editor( editorId ) {
+        $("#"+editorId+ "div").each(function () {
+            $(this).replaceWith("<p>" + $(this).html() + "</p>");
+        });
+        let textContent = document.getElementById( editorId).innerHTML;
+        // var updatedContent = textContent.replace(/<p><br><\/p>/g, '');
+        return textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '');
+
+    }*/
+
     $("#news-form").submit(function(event) {
         event.preventDefault();
 
         var formData = new FormData($(this)[0]);
+        let editorId = 'editor';
+        let texteditorText = get_text_from_rich_text_editor( editorId ).trim();
+
+        formData.append('description', texteditorText);
+        console.log( formData );
 
         // Frontend validation
         if ($('#title').val() === '' || $('#description').val() === '' || $('#category').val() === '') {

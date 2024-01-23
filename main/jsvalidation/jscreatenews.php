@@ -20,8 +20,8 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
         //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
             $result = array(
                 'success' => false,
-                'message'=>"Post is not valid",
-                'status_code'=>303
+                'message'=>"Successfully Created New Post",
+                'status_code'=>202
             );
         } else {
             $result = array(
