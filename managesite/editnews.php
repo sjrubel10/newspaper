@@ -29,11 +29,16 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $newData['title']?></title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="../assets/css/header.css">
         <link rel="stylesheet" href="../assets/css/common.css">
         <link rel="stylesheet" href="../assets/css/createnew.css">
+        <link rel="stylesheet" href="../assets/css/texteditor.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     </head>
     <body>
     <?php include_once "../views/header.php"?>
@@ -47,11 +52,17 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo $newData['title']?>" required><br>
 
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required><?php echo $newData['description']?></textarea><br>
+              <!--  <label for="description">Description:</label>
+                <textarea id="description" name="description" required><?php /*echo $newData['description']*/?></textarea><br>-->
+                <div class="editor-container" id="editor-container">
+                    <span class="editorText" id="editorText">Description</span>
+                    <div contenteditable="true" class="editor" id="editor">
+                        <?php echo $newData['description']?>
+                    </div>
+                </div>
 
                 <label for="images">Image:</label>
-                <input type="file" id="images" name="images" accept="image/*" required><br>
+                <input type="file" id="images" name="images" accept="image/*"><br>
 
                 <label for="category">Category:</label>
                 <select id="category" name="category" required>
@@ -71,9 +82,13 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     </div>
 
 
-    <script src="../assets/js/editnews.js"></script>
+
     </body>
     </html>
+
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/texteditor.js"></script>
+    <script src="../assets/js/editnews.js"></script>
 <?php }
 
     } else {

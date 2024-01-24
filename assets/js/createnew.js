@@ -18,7 +18,7 @@ $(document).ready(function() {
         let texteditorText = get_text_from_rich_text_editor( editorId ).trim();
 
         formData.append('description', texteditorText);
-        console.log( formData );
+        // console.log( formData );
 
         // Frontend validation
         if ($('#title').val() === '' || $('#description').val() === '' || $('#category').val() === '') {

@@ -15,6 +15,8 @@ if( count($news) < 1 ){
 }
 
 $popular = array_slice($news, 0, 5);
+
+//$adsImg = 'assets/uploads/ads/ads1.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">

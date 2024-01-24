@@ -31,11 +31,18 @@ function display_sliding_images( $slidingimages ): string
 ?>
 <div class="slideShowContainerHolder">
     <div class="slideShowContainer">
-        <?php echo display_sliding_images( $slidingimages ); ?>
+        <?php echo display_sliding_images( $slidingimages );?>
     </div>
-    <div class="addSectionHolder">
-        <div class="">
-            <img class="adsImage" alt="ads images" src="../assets/uploads/ads/ads1.jpeg">
+    <div class="addSectionHolder" style="display: none">
+        <div class="adsImageHolder">
+            <h2 class="campaignTitleText">campaign</h2>
+            <p>7 Google Shopping Feed Types and How to Use Them for WooCommerce Store - Jan 23, 2024
+
+                What is the biggest pain point after successfully launching your WooCommerce store? Reaching your customers, bringing traffic, and earning brand recognition, right? Building and maintaining a consistent flow of targeted traffic, establishing a strong online...
+                How to Generate WooCommerce Google Merchant Product Feed - Jan 22, 2024
+
+                Want to reach millions, if not billions, of customers for your WooCommerce store for free? Not a clickbait; Google Shopping makes it possible, even for free. Get organic visibility in front of a massive audience...</p>
+<!--            <img src="../assets/uploads/ads/ads1.png" alt="ads images" width="500" height="600">-->
         </div>
     </div>
 
@@ -90,6 +97,19 @@ function display_sliding_images( $slidingimages ): string
 
         // Initial slide show
         showSlides(slideIndex);
+
+        let slidDivContainer = $('.slideShowContainer').height();
+        $('.addSectionHolder').css({
+            'display': 'block',
+            'height': slidDivContainer+10
+        });
+
+        $(window).resize(function() {
+            let slidDivContainer = $('.slideShowContainer').height();
+            $('.addSectionHolder').css({
+                'height': slidDivContainer+10
+            });
+        });
     });
 </script>
 

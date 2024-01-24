@@ -3,6 +3,11 @@ $(document).ready(function() {
         event.preventDefault();
 
         var formData = new FormData($(this)[0]);
+        let editorId = 'editor';
+        let texteditorText = get_text_from_rich_text_editor( editorId ).trim();
+
+        formData.append('description', texteditorText);
+        console.log( formData );
 
         // Frontend validation
         if ($('#title').val() === '' || $('#description').val() === '' || $('#category').val() === '') {
