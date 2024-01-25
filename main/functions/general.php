@@ -1,7 +1,18 @@
 <?php
 //$sql = "ALTER TABLE `users` ADD `admin_level` INT(2) NOT NULL DEFAULT '0' AFTER `admin`";
 //$sql = "ALTER TABLE `news` ADD `post_status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `recorded`";
-
+function get_already_created_table_sql( $table_name ){
+    $conn = Db_connect();
+    $query = "SHOW CREATE TABLE $table_name";
+    $result = $conn->query($query);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        echo $row["Create Table"];
+    } else {
+        echo "Error: " . $conn->error;
+    }
+    $conn->close();
+}
 function news_category(){
     $categorys = array( 'Government','Sport', 'War', 'Politics', 'Education', 'Health', 'The environment',
         'Economy', 'Business', 'Fashion', 'Entertainment', 'Banking & Finance', 'Computers & IT','Art & Culture',
@@ -120,4 +131,8 @@ function strip_html_css( $htmlString ) {
     $htmlString = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $htmlString);
 
     return $htmlString;
+}
+
+function make_sql_table(){
+    $post_table_sql= 'CREATE TABLE `newsportal`.`postmeta` ( `meta_id` INT(43) NOT NULL , `post_id` INT(11) NOT NULL , `mata_key` VARCHAR(512) NOT NULL , `meta_value` TEXT NOT NULL ) ENGINE = InnoDB;';
 }
