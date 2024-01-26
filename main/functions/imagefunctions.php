@@ -55,5 +55,59 @@ function resizeAndSaveImage($file, $targetDir, $maxSize = 150, $maxWidth = 600, 
     }
 }
 
+function resizeImage($sourceImagePath, $destinationImagePath, $squareSize) {
+    // Get the dimensions of the source image
+    list($sourceWidth, $sourceHeight) = getimagesize($sourceImagePath);
+
+    // Create a new square canvas
+    $destinationImage = imagecreatetruecolor($squareSize, $squareSize);
+
+    // Determine offsets based on the aspect ratio
+    if ($sourceWidth > $sourceHeight) {
+        $square = $sourceHeight;
+        $offsetX = ($sourceWidth - $sourceHeight) / 2;
+        $offsetY = 0;
+    } elseif ($sourceHeight > $sourceWidth) {
+        $square = $sourceWidth;
+        $offsetX = 0;
+        $offsetY = ($sourceHeight - $sourceWidth) / 2;
+    } else {
+        // It's already a square
+        $square = $sourceWidth;
+        $offsetX = $offsetY = 0;
+    }
+
+    // Load the source image
+    $sourceImage = imagecreatefromstring(file_get_contents($sourceImagePath));
+
+    // Resize and center the image on the canvas
+    imagecopyresampled(
+        $destinationImage,
+        $sourceImage,
+        0,
+        0,
+        $offsetX,
+        $offsetY,
+        $squareSize,
+        $squareSize,
+        $square,
+        $square
+    );
+
+    // Save the resized image
+    imagejpeg($destinationImage, $destinationImagePath, 90);
+
+    // Free up memory
+    imagedestroy($sourceImage);
+    imagedestroy($destinationImage);
+}
+
+// Example usage:
+$sourceImagePath = 'source.jpg';
+$destinationImagePath = 'resized.jpg';
+$squareSize = 300; // Adjust the size as needed
+resizeImage($sourceImagePath, $destinationImagePath, $squareSize);
+
+
 /*$newTableSql = "CREATE TABLE `movie`.`news` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `title` VARCHAR(128) NOT NULL , `description` VARCHAR(512) NOT NULL , `images` VARCHAR(128) NOT NULL , `category` VARCHAR(30) NOT NULL , `recorded` TINYINT(1) NOT NULL DEFAULT '1' , `userid` INT(11) NOT NULL , `createddate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_comment` TINYINT(1) NOT NULL DEFAULT '1' , `commentid` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ";*/

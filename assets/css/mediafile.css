@@ -16,16 +16,16 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     overflow: hidden;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     cursor: pointer;
 }
 .image-container:hover{
-    border: 3px solid #007bff;
+    /*border: 3px solid #007bff;*/
 }
 
 .image-container img {
-    width: 200px;
+    width: 140px;
     height: auto;
     display: block;
 }
@@ -58,7 +58,11 @@ body {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 300px; /* Adjust the width as needed */
+    width: calc( 100% - 100px);
+    overflow: scroll;
+    max-height: 600px;
+    /* height: 800px; */
+    /* overflow: scroll;
 }
 
 #closePopup {
