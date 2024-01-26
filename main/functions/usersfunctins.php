@@ -6,10 +6,12 @@
  * Time: 10:40 PM
  */
 function var_test_die( $data ){
+    echo "<pre>";
     var_dump($data);
     die();
 }
 function var_test( $data ){
+    echo "<pre>";
     var_dump($data);
 }
 function getUserIdByProfileKey( $profileKey ) {
