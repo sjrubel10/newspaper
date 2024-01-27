@@ -192,16 +192,18 @@ function rich_text_editor_toolox_display( $editorId )
         $("#"+editorId).html(result);
     }
 
-
-    $(".submitaa").click(function() {
+    function get_text_from_text_editor( editorId ){
         $("#editor div").each(function () {
             $(this).replaceWith("<p>" + $(this).html() + "</p>");
         });
-        var textContent = document.getElementById("editor").innerHTML;
-        // Use regular expressions to remove all styles except font color insert_image
-        // var cleanedText = textContent.replace(/style="[^"]*"/g, '');
-        var cleanedText = textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '<p style="$1$2">');
+        let textContent = document.getElementById( editorId ).innerHTML;
+        let cleanedText = textContent.replace(/<p style="([^"]*color:[^";]*)|([^"]*text-align:[^";]*)[^"]*"[^>]*>/g, '<p style="$1$2">');
 
+        return cleanedText;
+    }
+
+    $(".submitaa").click(function() {
+        let cleanedText = get_text_from_text_editor( 'editor' )
         console.log( cleanedText );
     });
 </script>
