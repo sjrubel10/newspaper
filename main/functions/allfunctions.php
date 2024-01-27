@@ -5,3 +5,5 @@ require "indexfunctions.php";
 require "general.php";
 require "postmanagefunctions.php";
 require "buysellfunctions.php";
+require "seofriendlyfunctions.php";
+require "mediafilehandlefunctions.php";
