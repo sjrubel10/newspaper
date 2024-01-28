@@ -51,12 +51,14 @@ $(document).ready(function(){
 
     $('.close-btn').click(function(){
         let clickedId = $(this).attr('id');
-        startInterval();
+
 
         if ( !$(".main-image").hasClass('fullscreen') ) {
+            stopInterval();
             $("#fullScreen").text('');
             $("#fullScreen").append('&times;');
         }else{
+            startInterval();
             $("#fullScreen").text('');
             $("#fullScreen").append('Full');
             $("#nav-arrows").hide();
