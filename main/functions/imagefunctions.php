@@ -1,4 +1,27 @@
 <?php
+
+function insertImage( $image_name, $image_description, $image_ext, $image_slug, $image_alt_text, $image_link ) {
+    // Database connection settings
+    // Prepare and bind SQL statement with placeholders
+    $conn = Db_connect();
+    $sql = "INSERT INTO images ( image_name, image_description, image_ext, image_slug, image_alt_text, image_link ) 
+            VALUES ( ?, ?, ?, ?, ?, ? )";
+    $stmt = $conn->prepare( $sql );
+    $stmt->bind_param("ssssss", $image_name, $image_description, $image_ext, $image_slug, $image_alt_text, $image_link );
+
+    // Execute the statement
+    if ( $stmt->execute() ) {
+        $last_id = $conn->insert_id; // Get the ID of the last inserted record
+        $stmt->close();
+        $conn->close();
+        return $last_id; // Return the inserted pointer (ID)
+    } else {
+        $stmt->close();
+        $conn->close();
+        return "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
 function resizeAndSaveImage($file, $targetDir, $maxSize = 150, $maxWidth = 600, $maxHeight = 400) {
     // Get image details
     list($width, $height, $type, $attr) = getimagesize($file["tmp_name"]);
@@ -106,8 +129,7 @@ function resizeImage($sourceImagePath, $destinationImagePath, $squareSize) {
 $sourceImagePath = 'source.jpg';
 $destinationImagePath = 'resized.jpg';
 $squareSize = 300; // Adjust the size as needed
-resizeImage($sourceImagePath, $destinationImagePath, $squareSize);
+//resizeImage($sourceImagePath, $destinationImagePath, $squareSize);
 
-
-/*$newTableSql = "CREATE TABLE `movie`.`news` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `title` VARCHAR(128) NOT NULL , `description` VARCHAR(512) NOT NULL , `images` VARCHAR(128) NOT NULL , `category` VARCHAR(30) NOT NULL , `recorded` TINYINT(1) NOT NULL DEFAULT '1' , `userid` INT(11) NOT NULL , `createddate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_comment` TINYINT(1) NOT NULL DEFAULT '1' , `commentid` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-";*/
+//$image_table_sql = 'CREATE TABLE `newsportal`.`images` ( `id` INT NOT NULL AUTO_INCREMENT , `image_name` VARCHAR(256) NOT NULL , `image_description` TEXT NULL DEFAULT NULL , `image_ext` VARCHAR(11) NULL DEFAULT NULL , `recorded` TINYINT(1) NOT NULL , `image_slag` INT NULL DEFAULT NULL , `image_alt_text` INT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+/*$newTableSql = "CREATE TABLE `movie`.`news` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `title` VARCHAR(128) NOT NULL , `description` VARCHAR(512) NOT NULL , `images` VARCHAR(128) NOT NULL , `category` VARCHAR(30) NOT NULL , `recorded` TINYINT(1) NOT NULL DEFAULT '1' , `userid` INT(11) NOT NULL , `createddate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_comment` TINYINT(1) NOT NULL DEFAULT '1' , `commentid` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;*/

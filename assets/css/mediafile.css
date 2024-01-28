@@ -52,17 +52,15 @@ body {
 
 .popup {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 100px;
+    left: 50px;
+    /* transform: translate(-50%, -50%); */
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: calc( 100% - 100px);
+    width: calc( 100% - 140px);
     overflow: scroll;
-    max-height: 600px;
-    /* height: 800px; */
-    /* overflow: scroll;
+    max-height: 800px;
 }
 
 #closePopup {
@@ -84,5 +82,59 @@ body {
 
 .content {
     /* Styling for content */
+}
+
+.uploadMediaImage {
+    margin-bottom: 20px;
+}
+
+#fileInput {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#imageContainer {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input[type="hidden"],
+form input[type="text"],
+form textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form textarea {
+    height: 100px;
+}
+
+form button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Optional: Style for the file input button */
+#fileInput {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#fileInput:hover {
+    background-color: #0056b3;
 }
 

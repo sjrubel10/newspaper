@@ -22,12 +22,13 @@ require "main/init.php";
     <div id="popupContainer">
         <div class="popup">
             <div class="uploadMediaImage">
-                <input type="file" id="fileInput" multiple>
                 <div id="imageContainer"></div>
 
-                <form action="post.php" method="post">
-                    <input type="hidden" id="selectedImage" name="selectedImage" accept="image/">
-                    <textarea name="postContent" placeholder="Write your post content here..."></textarea>
+                <form id="imageForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="fileInput" accept="image/*">
+                    <input type="hidden" id="selectedImage" name="selectedImage">
+                    <input type="text" id="image_alt_text" name="image_alt_text" placeholder="Write your Image Slug Here...">
+                    <textarea id="image_desc" name="image_desc" placeholder="Write your post content here..."></textarea>
                     <button type="submit">Post</button>
                 </form>
             </div>
@@ -57,6 +58,27 @@ require "main/init.php";
 
 <script>
     $(document).ready(function() {
+
+        $(document).ready(function(){
+            $('#imageForm').submit(function(e){
+                alert( 'clicked');
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    url: 'main/jsvalidation/jsuploadmediafile.php',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        console.log(response); // Show response from PHP
+                    }
+                });
+                return false;
+            });
+        });
 
         $('#fileInput').change(function() {
             $('#imageContainer').empty();
@@ -124,6 +146,7 @@ require "main/init.php";
         $('#closePopup').click(function() {
             $('#popupContainer').fadeOut();
             $('#imageContainer').empty();
+            $('#mediaImageContainer').empty();
         });
 
     });
