@@ -41,7 +41,7 @@ $(document).ready(function() {
         $('#selectedImage').val(selectedImageSrc);
     });
 
-    function display_media_images( imageinfos ){
+    function display_media_images( imageinfos, imgClass ){
         let images ='<div class="image-container" id="' + imageinfos['name'] + '">\
                             <img class="image" src="' +imageinfos['path']+ '" alt="' + imageinfos['name'] + '">\
                         </div>';
@@ -102,10 +102,18 @@ $(document).ready(function() {
         $("#postImage").val( result['name']+'.'+result['extension'] );
     });
 
-    $(document).on('click', '#openPopup', function( e ) {
+    $(document).on('click', '.openPopup', function( e ) {
         e.preventDefault();
         $("#popupContainer").empty();
         $("#popupContainer").remove();
+
+        let clickedID = $(this).attr('id');
+        if( clickedID === 'openPopup' ){
+            var imgClass = 'image-container';
+        }else{
+             imgClass = 'image-container-gallery';
+        }
+        // alert( clickedID );
 
         var formData = [];
         if (allimages.length === 0) {
@@ -124,7 +132,7 @@ $(document).ready(function() {
                     $('body').append(mediaImagePopUp);
                     $('#popupContainer').fadeIn();
                     for (var i = 0; i < allimages.length; i++) {
-                        display_media_images(allimages[i]);
+                        display_media_images( allimages[i], imgClass );
                     }
                 }
             });

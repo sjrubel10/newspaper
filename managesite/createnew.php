@@ -43,8 +43,12 @@ $categorys = news_category();
                 </div>
             </div>
             <label for="images">Main Image:</label>
-            <button id="openPopup">Add Or Select Image</button>
+            <button class="openPopup" id="openPopup">Add Or Select Image</button>
             <input type="text" id="postImage" name="postImage" required><br>
+
+            <label for="images">gallery Image:</label>
+            <button class="openPopup" id="openPopupForGallery">Add Or Select Gallery Image </button>
+            <input type="text" id="postGalleryImage" name="postGalleryImage" required><br>
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>
