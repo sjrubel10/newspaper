@@ -128,10 +128,12 @@ form textarea {
 
 form button[type="submit"] {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #1d8919;
     color: #fff;
     border: none;
     cursor: pointer;
+    width: 70px;
+    float: right;
 }
 
 /* Optional: Style for the file input button */

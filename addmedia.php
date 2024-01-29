@@ -1,5 +1,56 @@
 <?php
 require "main/init.php";
+
+function buildFolderStructure($path) {
+    $structure = array();
+    $contents = scandir($path);
+
+
+    foreach ($contents as $item) {
+        if ($item != '.' && $item != '..') {
+            $itemPath = $path . DIRECTORY_SEPARATOR . $item;
+
+            if ( is_dir($itemPath ) ) {
+                $structure[$item] = buildFolderStructure($itemPath);
+            }
+        }
+    }
+
+    return $structure;
+}
+
+function findParentIndex($structure, $target, &$path = array()) {
+    foreach ($structure as $index => $substructure) {
+        if (is_array($substructure)) {
+            if (array_key_exists($target, $substructure)) {
+                $path[] = $index;
+                return true;
+            } elseif (findParentIndex($substructure, $target, $path)) {
+                $path[] = $index;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// Example usage:
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . "/newspaper/assets";
+$folderStructure = buildFolderStructure($rootPath);
+
+$path = array();
+$target = 'slideImages';
+
+
+if (findParentIndex($folderStructure, $target, $path)) {
+    $result = implode('/', array_reverse($path))."/";
+} else {
+    $result = false;
+}
+
+
+var_test_die( $result );
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

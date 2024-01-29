@@ -92,7 +92,6 @@ $(document).ready(function() {
                 if ( found ) return found;
             }
         }
-        // If no matching object is found, return null
         return [];
     }
 
