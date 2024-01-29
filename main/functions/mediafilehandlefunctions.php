@@ -6,8 +6,6 @@ function findImage( $imageName, $folderPath ) {
     }
     // Get all files in the folder
     $files = scandir($folderPath);
-//        var_test_die( $files );
-    // Search for the image
     foreach ($files as $file) {
         if ($file === '.' || $file === '..') {
             continue; // Skip current and parent directory entries
@@ -37,20 +35,16 @@ function directories_from_directory( $directory ){
         // Check if the item is a directory
         return is_dir($directory . DIRECTORY_SEPARATOR . $item);
     });
-    // Print out the folder names
-    /*foreach ($folders as $folder) {
-        echo $folder . "<br>";
-    }*/
 
     return $folders;
 }
 
 function getAllImagesInfo($folderPath) {
+
     // Check if the folder exists
     if (!is_dir($folderPath)) {
         return "Folder doesn't exist!";
     }
-
     // Get all files in the folder
     $files = scandir($folderPath);
 
@@ -61,13 +55,16 @@ function getAllImagesInfo($folderPath) {
         if ($file === '.' || $file === '..') {
             continue; // Skip current and parent directory entries
         }
+//        var_test( $file );
         $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
         // Check if the file is an image file
         if (is_file($filePath) && getimagesize($filePath)) {
+            $image_name = pathinfo($file, PATHINFO_FILENAME);
+            $image_extension = pathinfo($file, PATHINFO_EXTENSION);
             $imageInfo = array(
-                'path' => $filePath,
-                'name' => pathinfo($file, PATHINFO_FILENAME),
-                'extension' => pathinfo($file, PATHINFO_EXTENSION),
+                'path' => 'http://localhost:8888/newspaper/assets/uploads/'.$image_name.'.'.$image_extension,
+                'name' => $image_name,
+                'extension' => $image_extension,
                 'size' => filesize($filePath) // Get size of the image file in bytes
             );
             $imagesInfo[] = $imageInfo;

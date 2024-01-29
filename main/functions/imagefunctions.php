@@ -63,7 +63,7 @@ function resizeAndSaveImage($file, $targetDir, $maxSize = 150, $maxWidth = 600, 
 
     // Save the resized image
     $filename = $targetDir . uniqid() . "_" . $file["name"];
-    imagejpeg($newImage, $filename, 80); // Save as JPEG with 80% quality
+    imagejpeg($newImage, $filename, 90); // Save as JPEG with 80% quality
 
     // Free up memory
     imagedestroy($sourceImage);
@@ -80,6 +80,7 @@ function resizeAndSaveImage($file, $targetDir, $maxSize = 150, $maxWidth = 600, 
 
 function resizeImage($sourceImagePath, $destinationImagePath, $squareSize) {
     // Get the dimensions of the source image
+//    echo $destinationImagePath;
     list($sourceWidth, $sourceHeight) = getimagesize($sourceImagePath);
 
     // Create a new square canvas

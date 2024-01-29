@@ -16,8 +16,11 @@ $categorys = news_category();
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/createnew.css">
     <link rel="stylesheet" href="../assets/css/texteditor.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <link rel="stylesheet" href="../assets/css/mediafile.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/common.js"></script>
     <script src="../assets/js/texteditor.js"></script>
     <script src="../assets/js/createnew.js"></script>
@@ -40,7 +43,8 @@ $categorys = news_category();
                 </div>
             </div>
             <label for="images">Image:</label>
-            <input type="file" id="images" name="images" accept="image/*" required><br>
+            <button id="openPopup">Added Images</button>
+<!--            <input type="file" id="images" name="images" accept="image/*" required><br>-->
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>
@@ -57,7 +61,7 @@ $categorys = news_category();
     </div>
 </div>
 
-
+<script src="../assets/js/addmedia.js"></script>
 </body>
 </html>
 <?php } else {

@@ -25,9 +25,10 @@ body {
 }
 
 .image-container img {
-    width: 140px;
-    height: auto;
+    width: 100%;
     display: block;
+    height: 100%;
+    object-fit: cover;
 }
 
 .image {
@@ -52,7 +53,7 @@ body {
 
 .popup {
     position: absolute;
-    top: 100px;
+    top: 50px;
     left: 50px;
     /* transform: translate(-50%, -50%); */
     background-color: white;
@@ -60,13 +61,14 @@ body {
     border-radius: 5px;
     width: calc( 100% - 140px);
     overflow: scroll;
-    max-height: 800px;
+    max-height: 650px;
 }
 
 #closePopup {
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
 }
 
 .topContainer {
@@ -94,9 +96,16 @@ body {
 }
 
 #imageContainer {
-    width: 100%;
+    width: 450px;
     height: auto;
     margin-bottom: 10px;
+    border: 1px solid #f0e6e6;
+    border-radius: 5px;
+}
+.imageThumbnail{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 form {
