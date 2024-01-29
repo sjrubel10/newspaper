@@ -62,7 +62,7 @@ function getAllImagesInfo($folderPath) {
             $image_name = pathinfo($file, PATHINFO_FILENAME);
             $image_extension = pathinfo($file, PATHINFO_EXTENSION);
             $imageInfo = array(
-                'path' => 'http://localhost:8888/newspaper/assets/uploads/'.$image_name.'.'.$image_extension,
+                'path' => "http://".domainName."/newspaper/assets/uploads/".$image_name.'.'.$image_extension,
                 'name' => $image_name,
                 'extension' => $image_extension,
                 'size' => filesize($filePath) // Get size of the image file in bytes

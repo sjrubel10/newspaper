@@ -23,6 +23,7 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
         <link rel="stylesheet" href="assets/css/header.css">
         <link rel="stylesheet" href="assets/css/news.css">
         <link rel="stylesheet" href="assets/css/common.css">
+        <link rel="stylesheet" href="assets/css/product.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
@@ -37,8 +38,30 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
                 <span class="publish-time">Published on October 20, 2023 <?php /*echo $newData['createddate']*/?></span>
             </div>
             <div class="news-image">
-                <?php echo $imageLink?>
+<!--                --><?php //echo $imageLink?>
+                <div class="main-image-container">
+                    <div class="main-image">
+                        <img id="mainImg" src="assets/uploads/h410m-a-pro-500x500.jpg" alt="Main Image">
+                        <div class="nav-arrows" id="nav-arrows" style="display: none">
+                            <button class="prev-btn" id="prevBtn">&lt;</button>
+                            <button class="next-btn" id="nextBtn">&gt;</button>
+                        </div>
+                        <span class="close-btn" id="fullScreen">Full</span>
+                    </div>
+                </div>
+                <div class="additional-images">
+                    <img class="small-img focused" src="assets/uploads/h410m-a-pro-500x500.jpg" alt="Main Image">
+                    <img class="small-img" src="assets/uploads/img_lights_wide.jpg" alt="Additional Image 1">
+                    <img class="small-img" src="assets/uploads/img_mountains_wide.jpg" alt="Additional Image 2">
+                    <img class="small-img" src="assets/uploads/img_nature_wide.jpg" alt="Additional Image 3">
+                    <img class="small-img" src="assets/uploads/img_snow_wide.jpg" alt="Additional Image 4">
+                    <img class="small-img" src="assets/uploads/googluck.jpg" alt="Additional Image 5">
+                </div>
+
             </div>
+
+
+
 <!--            <p class="news-description">-->
                 <?php echo $newData['description']?>
 <!--            </p>-->
@@ -72,4 +95,6 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
 } else {
     header("Location: index.php");
 }?>
+
+<script src="assets/js/product.js"></script>
 

@@ -9,6 +9,7 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             $description = $_POST["description"] ?? "";
             $category = isset( $_POST["category"]) ? sanitize( $_POST["category"] ):"";
             $imageFileName = isset( $_POST["postImage"]) ? sanitize( $_POST["postImage"] ):"";
+            $additional_images = isset( $_POST["postGalleryImage"]) ? sanitize( $_POST["postGalleryImage"] ):"";
             $userid = 1;
             $conn = Db_connect();
             // Handle image upload
@@ -16,7 +17,7 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             $imageFileName = $timestamp . '_' . basename($_FILES["images"]["name"]); // Append timestamp to the image file name
             $targetDir = "../../assets/uploads/";
             $targetFile = $targetDir . $imageFileName;*/
-            $result = insertNews( $title, $newkey, $description, $imageFileName, $category, $userid, $conn );
+            $result = insertNews( $title, $newkey, $description, $imageFileName, $additional_images, $category, $userid, $conn );
 //            move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
         //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
             $result = array(

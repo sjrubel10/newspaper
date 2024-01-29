@@ -28,7 +28,7 @@ h1 {
 
 #mainImg {
     height: 500px;
-    width: 550px;
+    width: 100%;
     object-fit: cover;
     transition: transform 0.3s ease-in-out;
 }

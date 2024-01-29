@@ -99,7 +99,7 @@ $(document).ready(function(){
         $('.small-img').eq(currentIndex).addClass('focused');
     }
     function startInterval() {
-        intervalId = setInterval(changeImage, 5000); // Change image every 5 seconds (5000 milliseconds)
+        intervalId = setInterval(changeImage, 10000); // Change image every 5 seconds (5000 milliseconds)
     }
     // Start changing image at regular intervals initially
     startInterval();

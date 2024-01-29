@@ -5,4 +5,6 @@ session_start();
 
 $domainName = $_SERVER['HTTP_HOST'];
 
-//var_test_die( $_SESSION );
+define( 'domainName', $domainName );
+
+//var_test_die( $_SERVER );

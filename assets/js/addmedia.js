@@ -2,6 +2,12 @@ $(document).ready(function() {
 
     $(document).on('submit', '#imageForm', function(e) {
         e.preventDefault();
+        let postId = $(".imagepost").attr('id');
+        if( postId === 'mainImage_post' ){
+            var imageHolder = 'postImage';
+        }else{
+            imageHolder = 'postGalleryImage';
+        }
         var formData = new FormData($(this)[0]);
         $.ajax({
             url: '../main/jsvalidation/jsuploadmediafile.php',
@@ -13,8 +19,20 @@ $(document).ready(function() {
             processData: false,
             success: function(response){
                 var responseData = JSON.parse(response);
-                // console.log( responseData['image_name'] ); // Show response from PHP
-                $("#postImage").val( responseData['image_name'] );
+                if( postId === 'mainImage_post' ) {
+                    $("#postImage").val( responseData['image_name'] );
+                }else{
+                    var data = $("#postGalleryImage").val();
+                    if( data === '' ){
+                        var imgs_name = responseData['image_name'];
+                    }else{
+                        imgs_name = responseData['image_name']+', '+data;
+                    }
+                    let imgs = remove_duplicate( imgs_name );
+
+                    $("#postGalleryImage").val( imgs );
+                }
+
             }
         });
         return false;
@@ -24,7 +42,6 @@ $(document).ready(function() {
         // $('#fileInput').change(function() {
         $('#imageContainer').empty();
         let files = $(this)[0].files;
-        // console.log(files);
         for (let i = 0; i < files.length; i++) {
             let reader = new FileReader();
             reader.onload = function(e) {
@@ -42,13 +59,13 @@ $(document).ready(function() {
     });
 
     function display_media_images( imageinfos, imgClass ){
-        let images ='<div class="image-container" id="' + imageinfos['name'] + '">\
-                            <img class="image" src="' +imageinfos['path']+ '" alt="' + imageinfos['name'] + '">\
-                        </div>';
+        let images ='<div class="'+imgClass+'" id="' + imageinfos['name'] + '">\
+                                <img class="image" src="' +imageinfos['path']+ '" alt="' + imageinfos['name'] + '">\
+                            </div>';
         $("#mediaImageContainer").append( images );
     }
 
-    function display_and_Add_media_image(){
+    function display_and_Add_media_image( post_id ){
         let mediaImagePopUp = '<div id="popupContainer">\
                                     <div class="popup">\
                                         <div class="uploadMediaImage">\
@@ -58,7 +75,7 @@ $(document).ready(function() {
                                                 <input type="hidden" id="selectedImage" name="selectedImage">\
                                                 <input type="text" id="image_alt_text" name="image_alt_text" placeholder="Write your Image Slug Here...">\
                                                 <textarea id="image_desc" name="image_desc" placeholder="Write your post content here..."></textarea>\
-                                                <button type="submit">Post</button>\
+                                                <button id="'+post_id+'" class="imagepost" type="submit">Post</button>\
                                             </form>\
                                         </div>\
                                         <div class="mediaImageContainer">\
@@ -95,6 +112,19 @@ $(document).ready(function() {
         return [];
     }
 
+    function remove_duplicate( str ){
+        let arr = str.split(',');
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = arr[i].trim();
+        }
+        let uniqueNames = [];
+        $.each(arr, function(i, el){
+            if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+        });
+        let result = uniqueNames.join(', ');
+        return result;
+    }
+
     var allimages = [];
     $(document).on('click', '.image-container', function() {
         let clickedId = $(this).attr('id');
@@ -102,18 +132,35 @@ $(document).ready(function() {
         $("#postImage").val( result['name']+'.'+result['extension'] );
     });
 
+    $(document).on('click', '.image-container-gallery', function() {
+        let clickedId = $(this).attr('id');
+        const result = findObjectWithName( allimages, clickedId );
+        var data = $("#postGalleryImage").val();
+        if( data === '' ){
+            var imgs_name = result['name']+'.'+result['extension'];
+        }else{
+            imgs_name = result['name']+'.'+result['extension']+', '+data;
+        }
+        let imgs = remove_duplicate( imgs_name );
+
+        $("#postGalleryImage").val( imgs );
+    });
+
     $(document).on('click', '.openPopup', function( e ) {
         e.preventDefault();
         $("#popupContainer").empty();
         $("#popupContainer").remove();
 
+
+
         let clickedID = $(this).attr('id');
         if( clickedID === 'openPopup' ){
-            var imgClass = 'image-container';
+            var imgClass = "image-container";
+            var main_image = 'mainImage_post';
         }else{
-             imgClass = 'image-container-gallery';
+             imgClass = "image-container-gallery";
+            main_image = 'additionalImage_post';
         }
-        // alert( clickedID );
 
         var formData = [];
         if (allimages.length === 0) {
@@ -128,7 +175,7 @@ $(document).ready(function() {
                 success: function (response) {
                     var dataArray = JSON.parse(response);
                     allimages = dataArray.data; // Show response from PHP
-                    let mediaImagePopUp = display_and_Add_media_image();
+                    let mediaImagePopUp = display_and_Add_media_image( main_image );
                     $('body').append(mediaImagePopUp);
                     $('#popupContainer').fadeIn();
                     for (var i = 0; i < allimages.length; i++) {
@@ -137,11 +184,11 @@ $(document).ready(function() {
                 }
             });
         }else{
-            let mediaImagePopUp = display_and_Add_media_image();
+            let mediaImagePopUp = display_and_Add_media_image( main_image );
             $('body').append(mediaImagePopUp);
             $('#popupContainer').fadeIn();
             for (var i = 0; i < allimages.length; i++) {
-                display_media_images(allimages[i]);
+                display_media_images( allimages[i], imgClass );
             }
         }
         // return false;

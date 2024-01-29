@@ -86,9 +86,9 @@ function getNewsByKey( $conn, $key ) {
     }
 }
 
-function insertNews( $title, $newkey, $description, $images, $category, $userid, $conn ) {
+function insertNews( $title, $newkey, $description, $images, $additional_images, $category, $userid, $conn ) {
     // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO news (`title`, `newskey`, `description`, `images`, `category`, `userid`) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO news (`title`, `newskey`, `description`, `images`, additional_images, `category`, `userid`) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     if (!$stmt) {
         // Handle the prepare error
@@ -101,7 +101,7 @@ function insertNews( $title, $newkey, $description, $images, $category, $userid,
     }
 
     // Bind parameters and execute the statement
-    $stmt->bind_param("sssssi", $title, $newkey, $description, $images, $category, $userid);
+    $stmt->bind_param("ssssssi", $title, $newkey, $description, $images, $additional_images, $category, $userid);
 
     if ($stmt->execute()) {
         $result = array(

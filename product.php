@@ -42,9 +42,9 @@
         </div>
     </div>
     <div class="additional-images">
-        <img class="small-img" src="assets/uploads/1697774990_tecknews1.jpeg" alt="Additional Image 1">
-        <img class="small-img" src="assets/uploads/1697775085_teckNes2.jpeg" alt="Additional Image 2">
-        <img class="small-img" src="assets/uploads/1697775156_tecknews3.jpeg" alt="Additional Image 3">
+        <img class="small-img" src="assets/uploads/1697774990_tecknews1.jpg" alt="Additional Image 1">
+        <img class="small-img" src="assets/uploads/1697775085_teckNes2.jpg" alt="Additional Image 2">
+        <img class="small-img" src="assets/uploads/1697775156_tecknews3.jpg" alt="Additional Image 3">
         <img class="small-img" src="assets/uploads/1697775331_invironment13.png" alt="Additional Image 4">
         <img class="small-img" src="assets/uploads/1705559380_gold_caings.jpeg" alt="Additional Image 5">
     </div>
