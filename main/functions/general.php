@@ -133,6 +133,13 @@ function strip_html_css( $htmlString ) {
     return $htmlString;
 }
 
+function request_check_from_page( $page_name ){
+    $pages = array(
+        'createnew.php', 'editnews.php'
+    );
+    return in_array($page_name, $pages);
+}
+
 function make_sql_table(){
     $post_table_sql= 'CREATE TABLE `newsportal`.`postmeta` ( `meta_id` INT(43) NOT NULL , `post_id` INT(11) NOT NULL , `mata_key` VARCHAR(512) NOT NULL , `meta_value` TEXT NOT NULL ) ENGINE = InnoDB;';
     $make_images_table = 'CREATE TABLE `images` ( `id` int(11) NOT NULL AUTO_INCREMENT, `image_name` varchar(256) NOT NULL, `image_description` text DEFAULT NULL, `image_ext` varchar(11) DEFAULT NULL, `recorded` tinyint(1) NOT NULL DEFAULT 1, `image_slug` varchar(256) DEFAULT NULL, `image_link` varchar(256) DEFAULT NULL, `image_alt_text` varchar(256) DEFAULT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8';

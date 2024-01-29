@@ -42,9 +42,9 @@ $categorys = news_category();
                     <p>Write Something Here </p>
                 </div>
             </div>
-            <label for="images">Image:</label>
-            <button id="openPopup">Added Images</button>
-<!--            <input type="file" id="images" name="images" accept="image/*" required><br>-->
+            <label for="images">Main Image:</label>
+            <button id="openPopup">Add Or Select Image</button>
+            <input type="text" id="postImage" name="postImage" required><br>
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>

@@ -12,7 +12,9 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(response){
-                console.log(response); // Show response from PHP
+                var responseData = JSON.parse(response);
+                // console.log( responseData['image_name'] ); // Show response from PHP
+                $("#postImage").val( responseData['image_name'] );
             }
         });
         return false;
@@ -22,7 +24,7 @@ $(document).ready(function() {
         // $('#fileInput').change(function() {
         $('#imageContainer').empty();
         let files = $(this)[0].files;
-        console.log(files);
+        // console.log(files);
         for (let i = 0; i < files.length; i++) {
             let reader = new FileReader();
             reader.onload = function(e) {
@@ -93,14 +95,14 @@ $(document).ready(function() {
         // If no matching object is found, return null
         return [];
     }
+
     var allimages = [];
     $(document).on('click', '.image-container', function() {
         let clickedId = $(this).attr('id');
-        // Function to find the object with the specified name
         const result = findObjectWithName( allimages, clickedId );
-        // Output the result
-        console.log(result);
+        $("#postImage").val( result['name']+'.'+result['extension'] );
     });
+
     $(document).on('click', '#openPopup', function( e ) {
         e.preventDefault();
         $("#popupContainer").empty();

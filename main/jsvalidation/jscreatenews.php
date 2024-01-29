@@ -8,15 +8,16 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
             $newkey = substr(md5($title), 0, 8);;
             $description = $_POST["description"] ?? "";
             $category = isset( $_POST["category"]) ? sanitize( $_POST["category"] ):"";
+            $imageFileName = isset( $_POST["postImage"]) ? sanitize( $_POST["postImage"] ):"";
             $userid = 1;
             $conn = Db_connect();
             // Handle image upload
-            $timestamp = time(); // Get current timestamp
+            /*$timestamp = time(); // Get current timestamp
             $imageFileName = $timestamp . '_' . basename($_FILES["images"]["name"]); // Append timestamp to the image file name
             $targetDir = "../../assets/uploads/";
-            $targetFile = $targetDir . $imageFileName;
+            $targetFile = $targetDir . $imageFileName;*/
             $result = insertNews( $title, $newkey, $description, $imageFileName, $category, $userid, $conn );
-            move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
+//            move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
         //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
             $result = array(
                 'success' => false,
