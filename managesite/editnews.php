@@ -7,7 +7,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
         $key = $_GET['key'];
 //        var_test_die( $key );
         //$newData = getsingleNews( $key,$conn );
-        $newData = getNewsByKey($conn, $key);
+        $newData = getNewsByKey( $key );
         if( count( $newData ) > 0 ){
 //            $edit_news_data = $newData;
             $data_vailable = true;

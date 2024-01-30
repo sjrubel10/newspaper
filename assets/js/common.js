@@ -59,7 +59,7 @@ function navigate_tabs( clickClassHolderIdName, clickClassName, addSelectedClass
     });
 }
 
-function get_data_from_api( end_point, body_data, appendedId, display_type ){
+function get_data_from_api_old( end_point, body_data, appendedId, display_type ){
     if( end_point ) {
         $.post(
             end_point,
@@ -96,6 +96,47 @@ function get_data_from_api( end_point, body_data, appendedId, display_type ){
             });
     }else{
         alert("Please Provide Valid Api End Point");
+    }
+}
+function get_data_from_api(end_point, body_data, appendedId, display_type) {
+    if (end_point) {
+        $.ajax({
+            url: end_point,
+            method: 'POST',
+            data: body_data,
+            dataType: 'json',
+            success: function(result_data) {
+                if (result_data['success']) {
+                    if (display_type === 'display_news_control') {
+                        let finalData = result_data.data;
+                        $("#" + appendedId).empty();
+                        if (finalData.length > 0) {
+                            for (let i = 0; i < finalData.length; i++) {
+                                let display_data = dislay_posts_for_manages(finalData[i], body_data.action);
+                                $("#" + appendedId).append(display_data);
+                            }
+                        } else {
+                            $("#" + appendedId).append('<span class="emptyData">No News Found</span>');
+                        }
+                    } else if (display_type === 'make_admin') {
+                        alert(result_data.message);
+                    } else {
+                        alert("Something Went Wrong");
+                    }
+                } else {
+                    console.log(result_data['error_code']);
+                    console.log(result_data['data']);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+                alert("Error occurred while fetching data from the API.");
+            }
+        });
+    } else {
+        alert("Please Provide Valid API Endpoint");
     }
 }
 
