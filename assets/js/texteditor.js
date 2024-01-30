@@ -215,11 +215,29 @@ $(document).ready(function() {
         // Replace the content of the div with the cleaned HTML
         $("#editor").html(result);
     });
-    function insertImage( event ) {
+    function insertImage_old( event ) {
         event.preventDefault();
         var url = prompt('Enter the image URL:');
         if (url) {
             document.execCommand('insertImage', false, url);
+        }
+    }
+    function insertImage(event) {
+        event.preventDefault();
+        var url = prompt('Enter the image URL:');
+        var altText = prompt('Enter the alt text for the image:');
+        var className = prompt('Enter the class name for the image:'); // Prompt for class name
+
+        if (url) {
+            var imgElement = document.createElement('img');
+            imgElement.src = url;
+            imgElement.alt = altText; // Set alt attribute
+            imgElement.className = className; // Set class name
+
+            var imgHTML = imgElement.outerHTML;
+
+            // Insert the image HTML into the editor
+            document.execCommand('insertHTML', false, imgHTML);
         }
     }
     function insertTable( event ) {
