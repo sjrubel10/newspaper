@@ -4,21 +4,10 @@ require "main/init.php";
 if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     $conn = Db_connect();
     $key = $_GET['key'];
-    //$newData = getsingleNews( $key,$conn );
-//    $newData = getNewsByKey( $key);
 
     $folder_path = 'assets/uploads/';
     $newData = fetchNewsData( $key, $folder_path );
-//    var_test_die( $newData);
-
-    if( count($newData) > 0 ){
-    /*if($newData['images']){
-        $imageLink = '<img src="assets/uploads/' . $newData['images'] . '" alt="' . $newData['title'] . '">';
-    }else{
-        $imageLink = '<img src="assets/uploads/fallbackImage/fallbackImage.webp" alt="' . $newData['title'] . '">';
-    }*/
-    ?>
-
+    if( count($newData) > 0 ){ ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -45,7 +34,7 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
             <div class="news-image">
                 <div class="main-image-container">
                     <div class="main-image">
-                        <img id="mainImg" src="<?php echo $newData['image'];?>" alt="<?php echo $newData['title'];?>">
+                        <img id="mainImg" src="<?php echo $newData['main_image_link'];?>" alt="<?php echo $newData['title'];?>">
                         <div class="nav-arrows" id="nav-arrows" style="display: none">
                             <button class="prev-btn" id="prevBtn">&lt;</button>
                             <button class="next-btn" id="nextBtn">&gt;</button>
@@ -55,11 +44,12 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
                 </div>
                 <?php if( 1 ){?>
                     <div class="additional-images">
-                        <img class="small-img focused" src="<?php echo $newData['image'];?>" alt="<?php echo $newData['title'].' additional'?>">
+                        <img class="small-img focused" src="<?php echo $newData['main_image_link'];?>" alt="<?php echo $newData['title'].' additional'?>">
                         <?php
+//                        var_test_die( $newData['additional_image_links'] );
                         $i = 1;
-                        if( count( $newData['additional_images'] )){
-                            foreach ( $newData['additional_images'] as $additional_image ){ ?>
+                        if( count( $newData['additional_image_links'] ) ){
+                            foreach ( $newData['additional_image_links'] as $additional_image ){ ?>
                                 <img class="small-img" src="<?php echo $additional_image?>" alt="<?php echo $newData['title'].' additional '. $i ?>">
                         <?php $i++;
                             }

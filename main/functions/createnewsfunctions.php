@@ -61,32 +61,6 @@ function getNews_search( $conn, $limit, $search = '' ){
     }
 }
 
-function getNewsByKey( $key ) {
-    $conn = Db_connect();
-    $key = $conn->real_escape_string($key); // Sanitize the input to prevent SQL injection
-    $newsData = [];
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM news WHERE `newskey` = ?");
-    if ( $stmt ){
-        // Bind the parameter and execute the statement
-        $stmt->bind_param("s", $key);
-        $stmt->execute();
-        // Get the result
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $newsData = $result->fetch_assoc(); // Fetch the row as an associative array
-            $stmt->close(); // Close the prepared statement
-            return $newsData;
-        } else {
-            $stmt->close(); // Close the prepared statement
-            return $newsData; // Return null if no matching record is found
-        }
-    } else {
-        // Handle prepare error (you can log or return an error message)
-        return $newsData;
-    }
-}
-
 function insertNews( $title, $newkey, $description, $images, $additional_images, $category, $userid, $conn ) {
     // Prepare SQL statement
     $stmt = $conn->prepare("INSERT INTO news (`title`, `newskey`, `description`, `images`, additional_images, `category`, `userid`) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -123,10 +97,10 @@ function insertNews( $title, $newkey, $description, $images, $additional_images,
     return $result;
 }
 
-function updateNews( $title, $description, $images, $category, $newskey ) {
+function updateNews( $title, $description, $images, $additional_images, $category, $newskey ) {
     $conn = Db_connect();
     // Prepare SQL statement for update
-    $stmt = $conn->prepare("UPDATE news SET `title`=?, `description`=?, `images`=?, `category`=? WHERE `newskey`=?");
+    $stmt = $conn->prepare("UPDATE news SET `title`=?, `description`=?, `images`=?, `additional_images`=?, `category`=? WHERE `newskey`=?");
     if (!$stmt) {
         // Handle the prepare error
         $result = array(
@@ -137,7 +111,7 @@ function updateNews( $title, $description, $images, $category, $newskey ) {
         return $result;
     }
     // Bind parameters and execute the statement
-    $stmt->bind_param("sssss", $title, $description, $images, $category, $newskey );
+    $stmt->bind_param("ssssss", $title, $description, $images, $additional_images, $category, $newskey );
 
     if ($stmt->execute()) {
         $result = array(

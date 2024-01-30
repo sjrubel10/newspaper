@@ -5,9 +5,8 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )) {
         $conn = Db_connect();
         $key = $_GET['key'];
-//        var_test_die( $key );
-        //$newData = getsingleNews( $key,$conn );
-        $newData = getNewsByKey( $key );
+        $folder_path = 'assets/uploads/';
+        $newData = fetchNewsData( $key, $folder_path );
         if( count( $newData ) > 0 ){
 //            $edit_news_data = $newData;
             $data_vailable = true;
@@ -29,15 +28,15 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $newData['title']?></title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="../assets/css/header.css">
         <link rel="stylesheet" href="../assets/css/common.css">
         <link rel="stylesheet" href="../assets/css/createnew.css">
         <link rel="stylesheet" href="../assets/css/texteditor.css">
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+        <link rel="stylesheet" href="../assets/css/mediafile.css">
+        <link rel="stylesheet" href="../assets/css/product.css">
 
     </head>
     <body>
@@ -52,8 +51,6 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo $newData['title']?>" required><br>
 
-              <!--  <label for="description">Description:</label>
-                <textarea id="description" name="description" required><?php /*echo $newData['description']*/?></textarea><br>-->
                 <div class="editor-container" id="editor-container">
                     <span class="editorText" id="editorText">Description</span>
                     <div contenteditable="true" class="editor" id="editor">
@@ -61,8 +58,20 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
                     </div>
                 </div>
 
-                <label for="images">Image:</label>
-                <input type="file" id="images" name="images" accept="image/*"><br>
+                <!--<label for="images">Image:</label>
+                <input type="file" id="images" name="images" accept="image/*"><br>-->
+
+                <label for="images">Main Image:</label>
+                <!--<div class="additional-images">
+                    <img class="small-img focused" src="../<?php /*echo $newData['main_image_link'];*/?>">
+                </div>-->
+                <button class="openPopup" id="openPopup">Add Or Select Image</button>
+                <input type="text" id="postImage" name="postImage" value="<?php echo $newData['image']?>" required><br>
+
+                <label for="images">gallery Image:</label>
+                <button class="openPopup" id="openPopupForGallery">Add Or Select Gallery Image </button>
+                <input type="text" id="postGalleryImage" name="postGalleryImage" value="<?php echo $newData['additional_images']?>" required><br>
+
 
                 <label for="category">Category:</label>
                 <select id="category" name="category" required>
@@ -89,6 +98,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     <script src="../assets/js/common.js"></script>
     <script src="../assets/js/texteditor.js"></script>
     <script src="../assets/js/editnews.js"></script>
+    <script src="../assets/js/addmedia.js"></script>
 <?php }
 
     } else {
