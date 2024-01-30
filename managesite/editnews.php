@@ -5,9 +5,6 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
     if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )) {
         $conn = Db_connect();
         $key = $_GET['key'];
-//        var_test_die( $key );
-        //$newData = getsingleNews( $key,$conn );
-//        $newData = getNewsByKey( $key );
         $folder_path = 'assets/uploads/';
         $newData = fetchNewsData( $key, $folder_path );
         if( count( $newData ) > 0 ){

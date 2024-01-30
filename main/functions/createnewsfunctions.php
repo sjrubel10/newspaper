@@ -21,7 +21,7 @@ function getNews( $conn, $limit, $category = false ){
     }
 }
 function getNews_for_control( $limit, $action ){
-    $conn = $conn = Db_connect();
+    $conn = Db_connect();
     $post_status = $action['post_status'];
     if( $action['recorded'] === 1 ){
         $sql = "SELECT * FROM news WHERE `recorded`=1 AND `post_status`= $post_status ORDER BY id DESC LIMIT $limit";
