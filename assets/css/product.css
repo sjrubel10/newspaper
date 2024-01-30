@@ -76,7 +76,7 @@ h1 {
 
 .small-img {
     width: 80px;
-    margin: 0 5px;
+    margin: 0 1px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: border-color 0.3s ease-in-out;
