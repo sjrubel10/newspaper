@@ -5,17 +5,18 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     $conn = Db_connect();
     $key = $_GET['key'];
     //$newData = getsingleNews( $key,$conn );
-    $newData = getNewsByKey($conn, $key);
+//    $newData = getNewsByKey( $key);
 
-    $data = fetchNewsData( $conn, $key );
-    var_test_die( $data );
+    $folder_path = 'assets/uploads/';
+    $newData = fetchNewsData( $key, $folder_path );
+//    var_test_die( $newData['image'] );
 
     if( count($newData) > 0 ){
-    if($newData['images']){
+    /*if($newData['images']){
         $imageLink = '<img src="assets/uploads/' . $newData['images'] . '" alt="' . $newData['title'] . '">';
     }else{
         $imageLink = '<img src="assets/uploads/fallbackImage/fallbackImage.webp" alt="' . $newData['title'] . '">';
-    }
+    }*/
     ?>
 
     <!DOCTYPE html>
@@ -42,10 +43,9 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
                 <span class="publish-time">Published on October 20, 2023 <?php /*echo $newData['createddate']*/?></span>
             </div>
             <div class="news-image">
-<!--                --><?php //echo $imageLink?>
                 <div class="main-image-container">
                     <div class="main-image">
-                        <img id="mainImg" src="assets/uploads/h410m-a-pro-500x500.jpg" alt="Main Image">
+                        <img id="mainImg" src="<?php echo $newData['image'];?>" alt="<?php echo $newData['title'];?>">
                         <div class="nav-arrows" id="nav-arrows" style="display: none">
                             <button class="prev-btn" id="prevBtn">&lt;</button>
                             <button class="next-btn" id="nextBtn">&gt;</button>
@@ -53,22 +53,22 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
                         <span class="close-btn" id="fullScreen">Full</span>
                     </div>
                 </div>
-                <div class="additional-images">
-                    <img class="small-img focused" src="assets/uploads/h410m-a-pro-500x500.jpg" alt="Main Image">
-                    <img class="small-img" src="assets/uploads/img_lights_wide.jpg" alt="Additional Image 1">
-                    <img class="small-img" src="assets/uploads/img_mountains_wide.jpg" alt="Additional Image 2">
-                    <img class="small-img" src="assets/uploads/img_nature_wide.jpg" alt="Additional Image 3">
-                    <img class="small-img" src="assets/uploads/img_snow_wide.jpg" alt="Additional Image 4">
-                    <img class="small-img" src="assets/uploads/googluck.jpg" alt="Additional Image 5">
-                </div>
-
+                <?php if( 1 ){?>
+                    <div class="additional-images">
+                        <img class="small-img focused" src="<?php echo $newData['image'];?>" alt="<?php echo $newData['title'].' additional'?>">
+                        <?php
+                        $i = 1;
+                        if( count( $newData['additional_images'] )){
+                            foreach ( $newData['additional_images'] as $additional_image ){ ?>
+                                <img class="small-img" src="<?php echo $additional_image?>" alt="<?php echo $newData['title'].' additional '. $i ?>">
+                        <?php $i++;
+                            }
+                        }
+                        ?>
+                    </div>
+                <?php }?>
             </div>
-
-
-
-<!--            <p class="news-description">-->
-                <?php echo $newData['description']?>
-<!--            </p>-->
+            <?php echo $newData['description']?>
         </div>
 
         <div class="comment-box">

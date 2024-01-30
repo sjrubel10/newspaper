@@ -61,67 +61,8 @@ function getNews_search( $conn, $limit, $search = '' ){
     }
 }
 
-function make_addition_image_like( $string ){
-    $imageLinks = [];
-    if( $string !== null ){
-        $imagesArray = explode(', ', $string);
-
-        foreach ($imagesArray as $imageName) {
-            $imagePath = 'assets/uploads/' . $imageName;
-            $imageLinks[] = $imagePath;
-        }
-    }
-
-    return $imageLinks;
-
-}
-
-function fetchNewsData( $db, $key ) {
-    $newsData = array(); // Initialize $newsData as an array
-    $id = $newskey = $title = $description = $images = $additional_images = $category = $recorded = $post_status = $userid = $createddate = $is_comment = $commentid = null;
-    try {
-        $query = "SELECT `id`, `newskey`, `title`, `description`, `images`, `additional_images`, `category`, `recorded`, `post_status`, `userid`, `createddate`, `is_comment`, `commentid` FROM `news` WHERE `recorded` = 1 AND `newskey` = ?";
-        $st = $db->prepare($query);
-
-        if ($st) {
-            $st->bind_param("s", $key);
-            $st->execute();
-            $st->bind_result($id, $newskey, $title, $description, $images, $additional_images, $category, $recorded, $post_status, $userid, $createddate, $is_comment, $commentid);
-
-            while ($st->fetch()) {
-                $newsData = array(
-                    'id' => $id,
-                    'newskey' => $newskey,
-                    'title' => $title,
-                    'description' => $description,
-                    'images' => $images,
-                    'additional_images' => make_addition_image_like( $additional_images ),
-                    'category' => $category,
-                    'recorded' => $recorded,
-                    'post_status' => $post_status,
-                    'userid' => $userid,
-                    'createddate' => $createddate,
-                    'is_comment' => $is_comment,
-                    'commentid' => $commentid
-                );
-            }
-
-            $st->close();
-        } else {
-            throw new Exception("Error: Unable to prepare statement.");
-        }
-    } catch (Exception $e) {
-        // Handle the exception
-        error_log('Error fetching news data: ' . $e->getMessage());
-        return $newsData; // or handle the error in a different way
-    }
-
-    return $newsData;
-}
-
-
-
-function getNewsByKey( $conn, $key ) {
+function getNewsByKey( $key ) {
+    $conn = Db_connect();
     $key = $conn->real_escape_string($key); // Sanitize the input to prevent SQL injection
     $newsData = [];
     // Prepare the SQL statement

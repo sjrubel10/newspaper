@@ -8,3 +8,4 @@ require "buysellfunctions.php";
 require "seofriendlyfunctions.php";
 require "mediafilehandlefunctions.php";
 require "imagefunctions.php";
+require "postfunctions.php";
