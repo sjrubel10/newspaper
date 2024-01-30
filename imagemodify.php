@@ -1,5 +1,8 @@
 <?php
-require "main/init.php"; ?>
+require "main/init.php";
+$name = time();
+echo $name;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,7 @@ require "main/init.php"; ?>
 <h2>Upload and Resize Image</h2>
 <form action="" method="post" enctype="multipart/form-data">
     Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
     <input type="submit" value="Upload Image" name="submit">
 </form>
 
@@ -19,7 +22,7 @@ $resized_image_path = '';
 if(isset($_POST["submit"])) {
     // Check if file is selected
     if(isset($_FILES["fileToUpload"])) {
-        $target_dir1 = "assets/uploads/images/images300/";
+        $target_dir1 = "assets/uploads/images/images600/";
         $target_dir = "assets/uploads/images/rawimages/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 //        var_test_die( $target_file );
@@ -59,8 +62,8 @@ if(isset($_POST["submit"])) {
 
                 // Define maximum dimensions and size for resized image
                 $max_size_kb = 100;
-                $max_width = 300;
-                $max_height = 300;
+                $max_width = 100;
+                $max_height = 100;
 
                 // Call the resizeImage function to resize and save the uploaded image
                 $resized_image_path = resizeImage($target_file, $target_dir1, $imageFileType, $max_size_kb, $max_width, $max_height);
