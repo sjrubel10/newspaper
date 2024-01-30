@@ -22,115 +22,65 @@ function insertImage( $image_name, $image_description, $image_ext, $image_slug, 
     }
 }
 
-function resizeAndSaveImage($file, $targetDir, $maxSize = 150, $maxWidth = 600, $maxHeight = 400) {
-    // Get image details
-    list($width, $height, $type, $attr) = getimagesize($file["tmp_name"]);
 
-    // Calculate new dimensions
-    $aspectRatio = $width / $height;
-    $newWidth = min($width, $maxWidth);
-    $newHeight = min($height, $maxHeight);
-
-    if ($width > $newWidth) {
-        $newHeight = $newWidth / $aspectRatio;
-    }
-
-    if ($height > $newHeight) {
-        $newWidth = $newHeight * $aspectRatio;
-    }
-
-    // Create a new image resource with the new dimensions
-    $newImage = imagecreatetruecolor($newWidth, $newHeight);
-
-    // Load the original image based on its type
-    switch ($type) {
-        case IMAGETYPE_JPEG:
-            $sourceImage = imagecreatefromjpeg($file["tmp_name"]);
-            break;
-        case IMAGETYPE_PNG:
-            $sourceImage = imagecreatefrompng($file["tmp_name"]);
-            break;
-        case IMAGETYPE_GIF:
-            $sourceImage = imagecreatefromgif($file["tmp_name"]);
-            break;
-        default:
-            // Unsupported image type
-            return false;
-    }
-
-    // Resize the image
-    imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-    // Save the resized image
-    $filename = $targetDir . uniqid() . "_" . $file["name"];
-    imagejpeg($newImage, $filename, 90); // Save as JPEG with 80% quality
-
-    // Free up memory
-    imagedestroy($sourceImage);
-    imagedestroy($newImage);
-
-    // Check file size
-    if (filesize($filename) <= ($maxSize * 1024)) {
-        return $filename; // Return the resized image filename if size is within limit
-    } else {
-        unlink($filename); // Delete the file if it exceeds the size limit
-        return false;
-    }
-}
-
-function resizeImage($sourceImagePath, $destinationImagePath, $squareSize) {
-    // Get the dimensions of the source image
-//    echo $destinationImagePath;
-    list($sourceWidth, $sourceHeight) = getimagesize($sourceImagePath);
-
-    // Create a new square canvas
-    $destinationImage = imagecreatetruecolor($squareSize, $squareSize);
-
-    // Determine offsets based on the aspect ratio
-    if ($sourceWidth > $sourceHeight) {
-        $square = $sourceHeight;
-        $offsetX = ($sourceWidth - $sourceHeight) / 2;
-        $offsetY = 0;
-    } elseif ($sourceHeight > $sourceWidth) {
-        $square = $sourceWidth;
-        $offsetX = 0;
-        $offsetY = ($sourceHeight - $sourceWidth) / 2;
-    } else {
-        // It's already a square
-        $square = $sourceWidth;
-        $offsetX = $offsetY = 0;
-    }
-
-    // Load the source image
-    $sourceImage = imagecreatefromstring(file_get_contents($sourceImagePath));
-
-    // Resize and center the image on the canvas
-    imagecopyresampled(
-        $destinationImage,
-        $sourceImage,
-        0,
-        0,
-        $offsetX,
-        $offsetY,
-        $squareSize,
-        $squareSize,
-        $square,
-        $square
-    );
-
-    // Save the resized image
-    imagejpeg($destinationImage, $destinationImagePath, 90);
-
-    // Free up memory
-    imagedestroy($sourceImage);
-    imagedestroy($destinationImage);
-}
-
-// Example usage:
-$sourceImagePath = 'source.jpg';
-$destinationImagePath = 'resized.jpg';
-$squareSize = 300; // Adjust the size as needed
-//resizeImage($sourceImagePath, $destinationImagePath, $squareSize);
 
 //$image_table_sql = 'CREATE TABLE `newsportal`.`images` ( `id` INT NOT NULL AUTO_INCREMENT , `image_name` VARCHAR(256) NOT NULL , `image_description` TEXT NULL DEFAULT NULL , `image_ext` VARCHAR(11) NULL DEFAULT NULL , `recorded` TINYINT(1) NOT NULL , `image_slag` INT NULL DEFAULT NULL , `image_alt_text` INT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 /*$newTableSql = "CREATE TABLE `movie`.`news` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `title` VARCHAR(128) NOT NULL , `description` VARCHAR(512) NOT NULL , `images` VARCHAR(128) NOT NULL , `category` VARCHAR(30) NOT NULL , `recorded` TINYINT(1) NOT NULL DEFAULT '1' , `userid` INT(11) NOT NULL , `createddate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_comment` TINYINT(1) NOT NULL DEFAULT '1' , `commentid` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;*/
+
+function resizeImage($source_image, $destination_folder,$imageFileType, $max_size_kb = 100, $max_width = 300, $max_height = 300 )
+{
+    // Load the source image
+    $output_buffer = '';
+    $source = imagecreatefromjpeg($source_image);
+
+    // Get the original dimensions of the source image
+    $source_width = imagesx($source);
+    $source_height = imagesy($source);
+
+    // Calculate aspect ratio
+    $source_ratio = $source_width / $source_height;
+
+    // Calculate new dimensions while maintaining aspect ratio
+    if ($source_width > $max_width || $source_height > $max_height) {
+        if ($max_width / $max_height > $source_ratio) {
+            $new_width = $max_height * $source_ratio;
+            $new_height = $max_height;
+        } else {
+            $new_width = $max_width;
+            $new_height = $max_width / $source_ratio;
+        }
+    } else {
+        $new_width = $source_width;
+        $new_height = $source_height;
+    }
+
+    // Create a new true color image with the desired dimensions
+    $resized_image = imagecreatetruecolor($new_width, $new_height);
+
+    // Resize the source image to the new dimensions
+    imagecopyresampled($resized_image, $source, 0, 0, 0, 0, $new_width, $new_height, $source_width, $source_height);
+
+    // Compress the image to meet maximum file size requirement
+    $quality = 90; // Initial quality value
+    $output_image_path = tempnam(sys_get_temp_dir(), 'resized_image_'); // Temporary file path
+    $output_image_size = filesize($output_image_path);
+
+    // Iteratively compress the image until its size is within the maximum allowed size
+    while ($output_image_size > $max_size_kb * 1024 && $quality > 10) {
+        ob_start(); // Start output buffering
+        imagejpeg($resized_image, null, $quality); // Output image to buffer
+        $output_buffer = ob_get_clean(); // Get the contents of the output buffer
+        $quality -= 5; // Reduce quality
+        $output_image_size = strlen($output_buffer); // Get size of buffered image
+    }
+
+    // Save the resized image to the destination folder
+    $output_image_path = $destination_folder . "resized_image.$imageFileType";
+    file_put_contents($output_image_path, $output_buffer);
+
+    // Free up memory
+    imagedestroy($source);
+    imagedestroy($resized_image);
+
+    return $output_image_path;
+}

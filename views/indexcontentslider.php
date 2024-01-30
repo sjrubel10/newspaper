@@ -35,14 +35,7 @@ function display_sliding_images( $slidingimages ): string
     </div>
     <div class="addSectionHolder" style="display: none">
         <div class="adsImageHolder">
-            <h2 class="campaignTitleText">campaign</h2>
-            <p>7 Google Shopping Feed Types and How to Use Them for WooCommerce Store - Jan 23, 2024
-
-                What is the biggest pain point after successfully launching your WooCommerce store? Reaching your customers, bringing traffic, and earning brand recognition, right? Building and maintaining a consistent flow of targeted traffic, establishing a strong online...
-                How to Generate WooCommerce Google Merchant Product Feed - Jan 22, 2024
-
-                Want to reach millions, if not billions, of customers for your WooCommerce store for free? Not a clickbait; Google Shopping makes it possible, even for free. Get organic visibility in front of a massive audience...</p>
-<!--            <img src="../assets/uploads/ads/ads1.png" alt="ads images" width="500" height="600">-->
+            <img src="assets/uploads/ads/champign.webp" alt="ads images" style="width: 100%; height: 100%">
         </div>
     </div>
 

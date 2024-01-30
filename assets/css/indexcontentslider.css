@@ -27,13 +27,13 @@
     margin-right: 15px;
 }
 .addSectionHolder{
-    display: block;
     float: left;
     width: 250px;
-    background-color: #473a3a;
+    background-color: #bfc6cd59;
     border-radius: 5px;
-    overflow: scroll;
-    color: #FFFFFF;
+    /*overflow: scroll;*/
+    overflow: hidden;
+    color: #16150f;
     text-align: center;
 }
 
@@ -46,8 +46,10 @@
     display: block;
     float: left;
     position: relative;
-    width: calc( 100% - 10px);
+    /*width: calc( 100% - 10px);*/
     padding: 5px 5px 5px 5px;
+    height: 100%;
+    width: 100%;
 }
 
 
