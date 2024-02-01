@@ -1,8 +1,14 @@
 <?php
-$slidingimages = array(
+/*$slidingimages = array(
         0=>"assets/uploads/images/slideImages/img_mountains_wide.jpg",
         1=>"assets/uploads/images/slideImages/img_nature_wide.jpg",
         2=>"assets/uploads/images/slideImages/img_snow_wide.jpg",
+);*/
+
+$slidingimages = array(
+        0=>"assets/uploads/images/slideImages/img_mountains_wide.jpeg",
+        1=>"assets/uploads/images/slideImages/img_nature_wide.jpeg",
+        2=>"assets/uploads/images/slideImages/img_snow_wide.jpeg",
 );
 function display_sliding_images( $slidingimages ): string
 {

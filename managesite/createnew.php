@@ -61,9 +61,46 @@ $categorys = news_category();
             </select>
             <button type="submit">Submit</button>
         </form>
+        <form action="/submit_product" method="post">
+            <label for="sku">SKU:</label><br>
+            <input type="text" id="sku" name="sku"><br><br>
+
+            <label for="regular_price">Regular Price:</label><br>
+            <input type="number" id="regular_price" name="regular_price" step="0.01" min="0"><br><br>
+
+            <label for="sale_price">Sale Price:</label><br>
+            <input type="number" id="sale_price" name="sale_price" step="0.01" min="0"><br><br>
+
+            <label>Stock Management:</label><br>
+            <input type="radio" id="in_stock" name="stock_status" value="in_stock" checked>
+            <label for="in_stock">In stock</label><br>
+            <input type="radio" id="out_of_stock" name="stock_status" value="out_of_stock">
+            <label for="out_of_stock">Out of stock</label><br>
+            <input type="radio" id="on_backorder" name="stock_status" value="on_backorder">
+            <label for="on_backorder">On backorder</label><br><br>
+
+            <label for="quantity">Quantity:</label><br>
+            <input type="number" id="quantity" name="quantity" value="1" min="1"><br><br>
+
+            <label for="stock">Stock:</label><br>
+            <input type="number" id="stock" name="stock" value="0" min="0"><br><br>
+
+            <label for="backorders">Allow Backorders:</label><br>
+            <input type="radio" id="no_backorders" name="backorders" value="do_not_allow" checked>
+            <label for="no_backorders">Do not allow</label><br>
+            <input type="radio" id="notify_customer" name="backorders" value="allow_notify">
+            <label for="notify_customer">Allow, but notify customer</label><br>
+            <input type="radio" id="allow_backorders" name="backorders" value="allow">
+            <label for="allow_backorders">Allow</label><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
         <div id="error-message"></div>
     </div>
 </div>
+
+
 
 <script src="../assets/js/addmedia.js"></script>
 </body>
