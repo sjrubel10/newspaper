@@ -79,10 +79,12 @@ function insertNews( $title, $newkey, $description, $images, $additional_images,
     $stmt->bind_param("ssssssi", $title, $newkey, $description, $images, $additional_images, $category, $userid);
 
     if ($stmt->execute()) {
+        $last_insert_id = $conn->insert_id;
         $result = array(
-            'success' => true,
-            'message' => "New record inserted successfully",
-            'status_code' => 202
+            'success'       => true,
+            'last_insert_id'          => $last_insert_id,
+            'message'       => "New record inserted successfully",
+            'status_code'   => 202
         );
     } else {
         $result = array(
@@ -96,6 +98,55 @@ function insertNews( $title, $newkey, $description, $images, $additional_images,
     $stmt->close();
     return $result;
 }
+
+
+function insert_post_meta( $array, $postId ): array
+{
+    $connection = Db_connect();
+    $tableName = "postmeta";
+    // Prepare the SQL statement
+    $sql = "INSERT INTO $tableName (`post_id`, `meta_key`, `meta_value`) VALUES (?, ?, ?)";
+    // Prepare the statement
+    $stmt = $connection->prepare($sql);
+
+    // Check if preparation succeeded
+    if (!$stmt) {
+        return array(
+            'success' => false,
+            'message' => "Database Error in meta data insert: " . $connection->error,
+            'status_code' => 404
+        );
+    }
+
+    // Initialize variables to bind parameters
+    $stmt->bind_param("iss", $postId, $metaKey, $metaValue);
+
+    // Initialize default result
+    $result = array(
+        'success' => true,
+        'message' => "New records inserted successfully",
+        'status_code' => 202
+    );
+
+    // Iterate through the array and insert values
+    foreach ($array as $metaKey => $metaValue) {
+        // Execute the statement
+        if (!$stmt->execute()) {
+            $result = array(
+                'success' => false,
+                'message' => "Database Error in meta data insert: " . $stmt->error,
+                'status_code' => 404
+            );
+            break; // Break the loop on the first failure
+        }
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    return $result;
+}
+
 
 function updateNews( $title, $description, $images, $additional_images, $category, $newskey ) {
     $conn = Db_connect();

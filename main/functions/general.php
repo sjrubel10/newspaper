@@ -67,8 +67,30 @@ function sanitize($input) {
     // Remove leading and trailing whitespaces
     $input = trim($input);
     // Remove or encode potentially harmful characters
-    $input = filter_var($input, FILTER_SANITIZE_STRING);
-    return $input;
+
+    return filter_var($input, FILTER_SANITIZE_STRING);
+}
+
+function sanitize_array( $array, $sanitizationFunction ) {
+    // Check if the input is an array
+    if ( !is_array($array ) ) {
+        return $array; // Return the input unchanged if it's not an array
+    }
+    // Initialize an empty array to store the sanitized values
+    $sanitizedArray = array();
+    // Iterate through each element of the array
+    foreach ( $array as $key => $value ) {
+        // If the element is an array, recursively sanitize it
+        if (is_array($value)) {
+            $sanitizedArray[$key] = sanitizeArray( $value, $sanitizationFunction );
+        } else {
+            // If the element is not an array, sanitize it using the provided sanitization function
+            $sanitizedArray[$key] = $sanitizationFunction( $value );
+        }
+    }
+
+    // Return the sanitized array
+    return $sanitizedArray;
 }
 
 function get_type_of_post( $action ){

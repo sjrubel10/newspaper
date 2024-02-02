@@ -6,7 +6,8 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     $key = $_GET['key'];
 
     $folder_path = 'assets/uploads/';
-    $newData = fetchNewsData( $key, $folder_path );
+    $newData = fetch_post_data( $key, $folder_path );
+//    var_test_die( $newData );
     if( count($newData) > 0 ){ ?>
     <!DOCTYPE html>
     <html lang="en">

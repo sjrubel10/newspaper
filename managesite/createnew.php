@@ -3,6 +3,7 @@ require "../main/init.php";
  if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){
 $categorys = news_category();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,11 +45,11 @@ $categorys = news_category();
             </div>
             <label for="images">Main Image:</label>
             <button class="openPopup" id="openPopup">Add Or Select Image</button>
-            <input type="text" id="postImage" name="postImage" required><br>
+            <input type="text" id="postImage" name="metadata[postImage]" required><br>
 
             <label for="images">gallery Image:</label>
             <button class="openPopup" id="openPopupForGallery">Add Or Select Gallery Image </button>
-            <input type="text" id="postGalleryImage" name="postGalleryImage" required><br>
+            <input type="text" id="postGalleryImage" name="metadata[postGalleryImage]" required><br>
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>
@@ -59,41 +60,39 @@ $categorys = news_category();
                 }
                 ?>
             </select>
-            <button type="submit">Submit</button>
-        </form>
-        <form action="/submit_product" method="post">
+
             <label for="sku">SKU:</label><br>
-            <input type="text" id="sku" name="sku"><br><br>
+            <input type="text" id="sku" name="metadata[sku]"><br><br>
 
             <label for="regular_price">Regular Price:</label><br>
-            <input type="number" id="regular_price" name="regular_price" step="0.01" min="0"><br><br>
+            <input type="number" id="regular_price" name="metadata[regular_price]" step="0.01" min="0"><br><br>
 
             <label for="sale_price">Sale Price:</label><br>
-            <input type="number" id="sale_price" name="sale_price" step="0.01" min="0"><br><br>
+            <input type="number" id="sale_price" name="metadata[sale_price]" step="0.01" min="0"><br><br>
 
             <label>Stock Management:</label><br>
-            <input type="radio" id="in_stock" name="stock_status" value="in_stock" checked>
+            <input type="radio" id="in_stock" name="metadata[stock_status]" value="in_stock" checked>
             <label for="in_stock">In stock</label><br>
-            <input type="radio" id="out_of_stock" name="stock_status" value="out_of_stock">
+            <input type="radio" id="out_of_stock" name="metadata[stock_status]" value="out_of_stock">
             <label for="out_of_stock">Out of stock</label><br>
-            <input type="radio" id="on_backorder" name="stock_status" value="on_backorder">
+            <input type="radio" id="on_backorder" name="metadata[stock_status]" value="on_backorder">
             <label for="on_backorder">On backorder</label><br><br>
 
             <label for="quantity">Quantity:</label><br>
-            <input type="number" id="quantity" name="quantity" value="1" min="1"><br><br>
+            <input type="number" id="quantity" name="metadata[quantity]" value="1" min="1"><br><br>
 
             <label for="stock">Stock:</label><br>
-            <input type="number" id="stock" name="stock" value="0" min="0"><br><br>
+            <input type="number" id="stock" name="metadata[stock]" value="0" min="0"><br><br>
 
             <label for="backorders">Allow Backorders:</label><br>
-            <input type="radio" id="no_backorders" name="backorders" value="do_not_allow" checked>
+            <input type="radio" id="no_backorders" name="metadata[backorders]" value="do_not_allow" checked>
             <label for="no_backorders">Do not allow</label><br>
-            <input type="radio" id="notify_customer" name="backorders" value="allow_notify">
+            <input type="radio" id="notify_customer" name="metadata[backorders]" value="allow_notify">
             <label for="notify_customer">Allow, but notify customer</label><br>
-            <input type="radio" id="allow_backorders" name="backorders" value="allow">
+            <input type="radio" id="allow_backorders" name="metadata[backorders]" value="allow">
             <label for="allow_backorders">Allow</label><br><br>
 
-            <input type="submit" value="Submit">
+            <button type="submit">Create Post</button>
         </form>
 
         <div id="error-message"></div>
