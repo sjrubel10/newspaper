@@ -6,6 +6,7 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = isset($_POST["title"]) ? ucwords ( sanitize( trim( $_POST["title"] ) ) ):"";
 
+            var_test_die( $_POST );
             $newkey = substr(md5($title), 0, 8);;
             $description = $_POST["description"] ?? "";
             $category = isset( $_POST["category"]) ? sanitize( $_POST["category"] ):"";

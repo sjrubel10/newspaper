@@ -5,19 +5,19 @@
     width: 1000px;
     margin: auto;
 }
-.createNewsTitle{
+.createNewsTitleText{
     text-align: center;
 }
 
 .left-side {
     width: 600px;
-    border: 1px solid black;
+    border: 1px solid #d8d4d4;
     padding: 1rem;
 }
 
 .right-side {
     width: 400px;
-    border: 1px solid black;
+    border: 1px solid #d8d4d4;
     padding: 1rem;
 }
 
