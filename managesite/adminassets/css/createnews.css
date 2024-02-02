@@ -5,6 +5,9 @@
     width: 1000px;
     margin: auto;
 }
+.createNewsTitle{
+    text-align: center;
+}
 
 .left-side {
     width: 600px;
