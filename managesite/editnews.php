@@ -6,7 +6,7 @@ if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] )
         $conn = Db_connect();
         $key = $_GET['key'];
         $folder_path = 'assets/uploads/';
-        $newData = fetchNewsData( $key, $folder_path );
+        $newData = fetch_post_data( $key, $folder_path );
         if( count( $newData ) > 0 ){
 //            $edit_news_data = $newData;
             $data_vailable = true;

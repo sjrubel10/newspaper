@@ -5,24 +5,26 @@ if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){
     if( $_SESSION['logged_in_user_data']['admin']=== 1 ) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = isset($_POST["title"]) ? ucwords ( sanitize( trim( $_POST["title"] ) ) ):"";
+
             $newkey = substr(md5($title), 0, 8);;
             $description = $_POST["description"] ?? "";
             $category = isset( $_POST["category"]) ? sanitize( $_POST["category"] ):"";
-            $imageFileName = isset( $_POST["postImage"]) ? sanitize( $_POST["postImage"] ):"";
-            $additional_images = isset( $_POST["postGalleryImage"]) ? sanitize( $_POST["postGalleryImage"] ):"";
+            $imageFileName = isset( $_POST['metadata']["postImage"]) ? sanitize( $_POST['metadata']["postImage"] ):"";
+            $additional_images = isset( $_POST['metadata']["postGalleryImage"]) ? sanitize( $_POST['metadata']["postGalleryImage"] ):"";
+
+            $metadata =
             $userid = 1;
             $conn = Db_connect();
-            // Handle image upload
-            /*$timestamp = time(); // Get current timestamp
-            $imageFileName = $timestamp . '_' . basename($_FILES["images"]["name"]); // Append timestamp to the image file name
-            $targetDir = "../../assets/uploads/";
-            $targetFile = $targetDir . $imageFileName;*/
             $result = insertNews( $title, $newkey, $description, $imageFileName, $additional_images, $category, $userid, $conn );
-//            move_uploaded_file($_FILES["images"]["tmp_name"], $targetFile);
-        //    resizeAndSaveImage($_FILES["images"]["tmp_name"], $targetFile);
+            if( $result['success'] && isset( $result['last_insert_id'] ) ){
+                $post_id = $result['last_insert_id'];
+                $post_meta = isset( $_POST['metadata'] ) ? sanitize_array( $_POST['metadata'], 'sanitize' ) : [];
+                $tableName =
+                $result = insert_post_meta( $post_meta, $result['last_insert_id'] );
+            }
             $result = array(
                 'success' => false,
-                'message'=>"Successfully Created New Post",
+                'message'=>"Successfulxly Created New Post",
                 'status_code'=>202
             );
         } else {

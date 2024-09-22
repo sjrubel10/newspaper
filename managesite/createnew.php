@@ -3,6 +3,7 @@ require "../main/init.php";
  if( isset( $_SESSION['logged_in'] ) && isset( $_SESSION['logged_in_user_data'] ) && $_SESSION['logged_in'] === true && $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){
 $categorys = news_category();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,11 +45,11 @@ $categorys = news_category();
             </div>
             <label for="images">Main Image:</label>
             <button class="openPopup" id="openPopup">Add Or Select Image</button>
-            <input type="text" id="postImage" name="postImage" required><br>
+            <input type="text" id="postImage" name="metadata[postImage]" required><br>
 
             <label for="images">gallery Image:</label>
             <button class="openPopup" id="openPopupForGallery">Add Or Select Gallery Image </button>
-            <input type="text" id="postGalleryImage" name="postGalleryImage" required><br>
+            <input type="text" id="postGalleryImage" name="metadata[postGalleryImage]" required><br>
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>
@@ -60,6 +61,7 @@ $categorys = news_category();
                 ?>
             </select>
             <button type="submit">Submit</button>
+
         </form>
 
         <div id="error-message"></div>

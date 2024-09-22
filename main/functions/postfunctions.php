@@ -23,7 +23,8 @@ function make_addition_image_like( $folder_path, $string, $title ){
     return $imageLinks;
 
 }
-function fetchNewsData( $key, $folder_path ) {
+function fetch_post_data( $key, $folder_path ): array
+{
     $db = Db_connect();
     $newsData = array(); // Initialize $newsData as an array
     $id = $newskey = $title = $description = $images = $additional_images = $category = $recorded = $post_status = $userid = $createddate = $is_comment = $commentid = null;
@@ -55,6 +56,7 @@ function fetchNewsData( $key, $folder_path ) {
                     'commentid' => $commentid
                 );
             }
+            $newsData['postmeta'] = get_post_meta_by_post_id( $id );
 
             $st->close();
         } else {
@@ -68,6 +70,51 @@ function fetchNewsData( $key, $folder_path ) {
 
     return $newsData;
 }
+
+function get_post_meta_by_post_id( $postId ) {
+    $conn = Db_connect();
+    // Prepare SQL statement
+    $sql = "SELECT meta_key, meta_value FROM postmeta WHERE post_id = ?";
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+
+    // Check if preparation succeeded
+    if (!$stmt) {
+        return array(
+            'success' => false,
+            'message' => "Database Error: " . $conn->error
+        );
+    }
+
+    // Bind parameters and execute the statement
+    $stmt->bind_param("i", $postId);
+    $stmt->execute();
+
+    // Get result
+    $result = $stmt->get_result();
+
+    // Check if there are any rows returned
+    if ($result->num_rows === 0) {
+        return array(
+            'success' => false,
+            'message' => "No data found for post_id: " . $postId
+        );
+    }
+
+    // Initialize array to store meta data
+    $metaArray = array();
+
+    // Fetch rows and construct array
+    while ($row = $result->fetch_assoc()) {
+        $metaArray[$row['meta_key']] = $row['meta_value'];
+    }
+    // Close the statement
+    $stmt->close();
+
+    // Return the array
+    return $metaArray;
+}
+
 
 function display_Additional_images_on_post( $main_image, $additional_images, $title ){
     $additional_images_html = '';
