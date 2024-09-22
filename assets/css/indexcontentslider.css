@@ -23,7 +23,8 @@
 .slideShowContainer{
     display: block;
     float: left;
-    width: calc( 100% - 265px );
+    /*width: calc( 100% - 265px );*/
+    width: calc( 100% - 20px );
     margin-right: 15px;
 }
 .addSectionHolder{

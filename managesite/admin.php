@@ -29,7 +29,7 @@
                         <li class="manage-admins" id="manage-admins "><a href="createnew.php">Create News</a></li>
                         <li class="manage-admins adminTabChange" id="manage-admins">Manage Admins</li>
                         <li class="manage-posts adminTabChange" id="manage-posts">Manage Posts</li>
-                        <li class="analytics adminTabChange" id="analytics">Analytics</li>
+<!--                        <li class="analytics adminTabChange" id="analytics">Analytics</li>-->
                     </ul>
                 </div>
                 <div class="admincontentholder">

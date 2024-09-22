@@ -64,7 +64,7 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
         <div class="comment-box">
             <h2>Comments</h2>
             <!-- Comment form -->
-            <form method="post">
+            <form method="post" id="comment-form">
                 <label for="comment">Leave a Comment:</label>
                 <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
                 <button type="submit">Submit</button>
@@ -90,5 +90,5 @@ if( isset(  $_GET['key'] ) && !empty(  $_GET['key'] )){
     header("Location: index.php");
 }?>
 
-<script src="assets/js/product.js"></script>
+<script src="assets/js/news.js"></script>
 

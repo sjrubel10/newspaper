@@ -1,8 +1,10 @@
 .newCardHolder{
     display: block;
     position: relative;
-    float: left;
+    /*float: left;*/
+    margin: auto;
     width: 100%;
+    max-width: 1500px;
     top: 20px;
 }
 
